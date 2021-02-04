@@ -1202,7 +1202,7 @@ static const u16 sTMHMMoves[] =
     MOVE_TOXIC,
     MOVE_HAIL,
     MOVE_BULK_UP,
-    MOVE_BULLET_SEED,
+    MOVE_SWEET_SCENT, // SPEEDCHOICE (Sweet Scent instead of Bullet Seed)
     MOVE_HIDDEN_POWER,
     MOVE_SUNNY_DAY,
     MOVE_TAUNT,

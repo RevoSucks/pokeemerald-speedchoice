@@ -22,6 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "speedchoice.h"
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -913,7 +914,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
                 continue;
 
             eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
-            if (eggCycles != 0)
+            if (eggCycles != 0 && CheckSpeedchoiceOption(FAST_EGG_HATCH, FAST_EGG_HATCH_NO) == TRUE)
             {
                 if (eggCycles >= toSub)
                     eggCycles -= toSub;

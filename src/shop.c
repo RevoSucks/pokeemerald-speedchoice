@@ -39,6 +39,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/tv.h"
+#include "done_button.h"
 
 EWRAM_DATA struct MartInfo gMartInfo = {0};
 EWRAM_DATA struct ShopData *gShopDataPtr = NULL;
@@ -1089,6 +1090,7 @@ static void BuyMenuSubtractMoney(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_SHOPPED);
     RemoveMoney(&gSaveBlock1Ptr->money, gShopDataPtr->totalCost);
+    TryAddButtonStatBy(DB_MONEY_SPENT, gShopDataPtr->totalCost);
     PlaySE(SE_SHOP);
     PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
 
@@ -1205,6 +1207,7 @@ static void RecordItemPurchase(u8 taskId)
         gMartPurchaseHistory[gMartPurchaseHistoryId].quantity = tItemCount;
         gMartPurchaseHistoryId++;
     }
+    TryAddButtonStatBy(DB_ITEMS_BOUGHT, tItemCount);
 }
 
 #undef tItemCount

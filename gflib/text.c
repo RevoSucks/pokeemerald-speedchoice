@@ -11,6 +11,7 @@
 #include "blit.h"
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
+#include "speedchoice.h"
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -212,29 +213,44 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 void RunTextPrinters(void)
 {
     int i;
+    u16 temp;
+    bool32 isInstantText = !gSaveBlock2Ptr->speedchoiceConfig.instantText ? TRUE : FALSE; // force correct result. this is dumb, i know.
 
-    if (gUnknown_03002F84 == 0)
+    do
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+    	int numEmpty = 0;
+        if (gUnknown_03002F84 == 0)
         {
-            if (gTextPrinters[i].active)
+            for (i = 0; i < 0x20; ++i)
             {
-                u16 temp = RenderFont(&gTextPrinters[i]);
-                switch (temp)
+                if (gTextPrinters[i].active)
                 {
-                case 0:
-                    CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
-                case 3:
-                    if (gTextPrinters[i].callback != 0)
-                        gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
-                    break;
-                case 1:
-                    gTextPrinters[i].active = 0;
-                    break;
+                    u16 temp = RenderFont(&gTextPrinters[i]);
+                    switch (temp)
+                    {
+                    case 0:
+                        CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                        if (gTextPrinters[i].callback != 0)
+                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                        break;
+                    case 3:
+                        if (gTextPrinters[i].callback != 0)
+                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                        return;
+                    case 1:
+                        gTextPrinters[i].active = 0;
+                        return;
+                    }
+                }
+                else
+                {
+                    numEmpty++;
                 }
             }
+            if(numEmpty == 0x20)
+                return;
         }
-    }
+    } while(isInstantText);
 }
 
 bool16 IsTextPrinterActive(u8 id)
@@ -765,7 +781,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     else
     {
         TextPrinterDrawDownArrow(textPrinter);
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((JOY_HELD(A_BUTTON | B_BUTTON) && CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);
@@ -783,7 +799,7 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
     }
     else
     {
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((JOY_HELD(A_BUTTON | B_BUTTON) && CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);

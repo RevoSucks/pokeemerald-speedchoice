@@ -36,6 +36,7 @@
 #include "data.h"
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
+#include "speedchoice.h"
 
 struct EggHatchData
 {
@@ -868,6 +869,7 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
 u8 GetEggCyclesToSubtract(void)
 {
     u8 count, i;
+
     for (count = CalculatePlayerPartyCount(), i = 0; i < count; i++)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))

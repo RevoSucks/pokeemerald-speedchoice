@@ -4194,8 +4194,8 @@
     {
       "id": "LAYOUT_ALTERING_CAVE",
       "name": "AlteringCave_Layout",
-      "width": 32,
-      "height": 24,
+      "width": 34,
+      "height": 26,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/AlteringCave/border.bin",
@@ -4410,6 +4410,86 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE1",
+      "name": "AlteringCave_Cave1_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave1/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave1/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE2",
+      "name": "AlteringCave_Cave2_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave2/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave2/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE3",
+      "name": "AlteringCave_Cave3_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave3/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave3/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE4",
+      "name": "AlteringCave_Cave4_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave4/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave4/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE5",
+      "name": "AlteringCave_Cave5_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave5/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave5/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE6",
+      "name": "AlteringCave_Cave6_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave6/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave6/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE7",
+      "name": "AlteringCave_Cave7_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave7/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave7/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_CAVE8",
+      "name": "AlteringCave_Cave8_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Cave8/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Cave8/map.bin"
     }
   ]
 }

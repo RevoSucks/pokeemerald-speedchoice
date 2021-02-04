@@ -25,6 +25,7 @@
 #include "title_screen.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
+#include "done_button.h"
 
 /*
  * Intro animation sequence state machine
@@ -968,8 +969,10 @@ static void MainCB2_Intro(void)
 
 static void MainCB2_EndIntro(void)
 {
-    if (!UpdatePaletteFade())
+    if (!UpdatePaletteFade()) {
+        sInIntro = FALSE;
         SetMainCallback2(CB2_InitTitleScreen);
+    }
 }
 
 static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteAddress)
@@ -1037,6 +1040,7 @@ static u8 SetUpCopyrightScreen(void)
             break;
         CreateTask(Task_IntroLoadPart1Graphics, 0);
         SetMainCallback2(MainCB2_Intro);
+        sInIntro = TRUE;
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
         {
             if (gMultibootProgramStruct.gcmb_field_2 == 2)

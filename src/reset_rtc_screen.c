@@ -18,6 +18,7 @@
 #include "window.h"
 #include "gpu_regs.h"
 #include "constants/rgb.h"
+#include "done_button.h"
 
 struct ResetRtcStruct
 {
@@ -421,6 +422,7 @@ static void Task_ResetRtc_1(u8 taskId)
             gTasks[taskId].func = Task_ResetRtc_2;
             data[1] = 1;
             data[2] = 6;
+            TryIncrementButtonStat(DB_CLOCK_RESET_COUNT);
         }
     }
     else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, JOY_REPEAT(DPAD_UP | DPAD_DOWN)))

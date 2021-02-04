@@ -404,4 +404,5 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_OLD_SEA_MAP] = {gItemIcon_OldSeaMap, gItemIconPalette_OldSeaMap},
     // Return to field arrow
     [ITEM_FIELD_ARROW] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
+    [ITEM_DONE_BUTTON] = {gItemIcon_DoneButton, gItemIconPalette_DoneButton},
 };

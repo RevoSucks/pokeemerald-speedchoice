@@ -10,6 +10,7 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
+gTMText_14::
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM47
 	compare VAR_RESULT, FALSE
@@ -35,6 +36,20 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_EXIT
 	removeobject LOCALID_STEVEN
+	checkspeedchoice PLOTLESS, PLOT_KEEP
+	goto_if TRUE, StevenRoomEventEnd
+	checkspeedchoice PLOTLESS, PLOT_SEMI
+	goto_if TRUE, StevenRoomEventEnd
+	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
+	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_CAPTAIN_STERN
+	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
+	setflag FLAG_DELIVERED_DEVON_GOODS
+	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
+	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
+	setvar VAR_REGISTER_BIRCH_STATE, 1 @ fix for no Birch on Route 110
+StevenRoomEventEnd::
 	release
 	end
 

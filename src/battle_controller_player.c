@@ -62,7 +62,7 @@ static void PlayerHandleChooseMove(void);
 static void PlayerHandleChooseItem(void);
 static void PlayerHandleChoosePokemon(void);
 static void PlayerHandleCmd23(void);
-static void PlayerHandleHealthBarUpdate(void);
+void PlayerHandleHealthBarUpdate(void);
 static void PlayerHandleExpUpdate(void);
 static void PlayerHandleStatusIconUpdate(void);
 static void PlayerHandleStatusAnimation(void);
@@ -1106,7 +1106,7 @@ void c3_0802FDF4(u8 taskId)
     }
 }
 
-static void CompleteOnHealthbarDone(void)
+void CompleteOnHealthbarDone2(void)
 {
     s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
@@ -2666,7 +2666,7 @@ static void PlayerHandleCmd23(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleHealthBarUpdate(void)
+void PlayerHandleHealthBarUpdate(void)
 {
     s16 hpVal;
 
@@ -2692,7 +2692,7 @@ static void PlayerHandleHealthBarUpdate(void)
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone2;
 }
 
 static void PlayerHandleExpUpdate(void)

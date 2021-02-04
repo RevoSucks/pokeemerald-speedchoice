@@ -49,6 +49,8 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "speedchoice.h"
+#include "done_button.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -491,6 +493,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
+    TryAddButtonStatBy(DB_ITEMS_PICKED_UP, quantity);
     gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
     return FALSE;
 }
@@ -1325,11 +1328,7 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
 
 static bool8 WaitForAorBPress(void)
 {
-    if (JOY_NEW(A_BUTTON))
-        return TRUE;
-    if (JOY_NEW(B_BUTTON))
-        return TRUE;
-    return FALSE;
+    return ((CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE ? gMain.heldKeys : gMain.newKeys) & (A_BUTTON | B_BUTTON)) ? TRUE : FALSE;
 }
 
 bool8 ScrCmd_waitbuttonpress(struct ScriptContext *ctx)
@@ -1744,8 +1743,10 @@ bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore)
+    if (!ignore) {
+        TryAddButtonStatBy(DB_MONEY_SPENT, amount);
         RemoveMoney(&gSaveBlock1Ptr->money, amount);
+    }
     return FALSE;
 }
 
@@ -2302,5 +2303,14 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoSootopolisLegendWarp();
     ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+bool8 ScrCmd_checkspeedchoice(struct ScriptContext *ctx)
+{
+    u8 option = ScriptReadByte(ctx);
+    u8 setting = ScriptReadByte(ctx);
+
+    ctx->comparisonResult = CheckSpeedchoiceOption(option, setting);
     return TRUE;
 }

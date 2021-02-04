@@ -1256,7 +1256,7 @@ const struct Item gItems[] =
     {
         .name = _("MOON STONE"),
         .itemId = ITEM_MOON_STONE,
-        .price = 0,
+        .price = 2100,
         .description = sMoonStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = 1,
@@ -4882,6 +4882,20 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_DONE_BUTTON] =
+    {
+        .name = _("DONE BUTTON"),
+        .itemId = ITEM_DONE_BUTTON,
+        .price = 0,
+        .description = sDoneButton,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_DoneButton,
         .secondaryId = 0,
     },
 };

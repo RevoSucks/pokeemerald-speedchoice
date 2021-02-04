@@ -567,7 +567,15 @@ SlateportCity_EventScript_PowerTMClerk:: @ 81DD1D8
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart SlateportCity_Pokemart_PowerTMs
+	checkspeedchoice BETTER_MARTS, MARTS_OFF
+	goto_if TRUE, SlateportCityItems1
+	pokemart SlateportCity_Pokemart_Speedchoice
+    goto AfterSlateportCityItems1
+
+SlateportCityItems1::
+    pokemart SlateportCity_Pokemart_PowerTMs
+
+AfterSlateportCityItems1::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -579,6 +587,22 @@ SlateportCity_Pokemart_PowerTMs: @ 81DD1F0
 	.2byte ITEM_NONE
 	release
 	end
+
+    .align 2
+SlateportCity_Pokemart_Speedchoice: @ 81DD1F0
+    .2byte ITEM_TM10
+    .2byte ITEM_TM43
+    .2byte ITEM_SUN_STONE
+    .2byte ITEM_MOON_STONE
+    .2byte ITEM_FIRE_STONE
+    .2byte ITEM_THUNDER_STONE
+    .2byte ITEM_WATER_STONE
+    .2byte ITEM_LEAF_STONE
+    .2byte ITEM_SEA_INCENSE
+    .2byte ITEM_LAX_INCENSE
+    .2byte ITEM_NONE
+    release
+    end
 
 @ Scene with Capt Sterns interview and Team Aqua announcing plans to steal Submarine
 SlateportCity_EventScript_CaptStern:: @ 81DD1F8

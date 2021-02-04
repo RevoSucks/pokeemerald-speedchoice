@@ -374,6 +374,7 @@ void sub_805D7AC(struct Sprite *sprite)
     if (!(gIntroSlideFlags & 1))
     {
         sprite->pos2.x += sprite->data[0];
+        sprite->pos2.x += sprite->data[0] / 2; // x1.5x SPEEDCHOICE
         if (sprite->pos2.x == 0)
         {
             if (sprite->pos2.y != 0)

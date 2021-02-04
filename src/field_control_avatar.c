@@ -35,6 +35,8 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+#include "speedchoice.h"
+#include "done_button.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -132,6 +134,33 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_EAST;
 }
 
+// The player is in a moving state. Assume a step was taken: figure out what it was.
+void DoDoneButtonStepStat(void)
+{
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING) 
+     || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER))
+    {
+        TryIncrementButtonStat(DB_STEP_COUNT_SURF);
+        TryIncrementButtonStat(DB_STEP_COUNT); // step total
+    }
+    else if((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE) 
+         || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    {
+        TryIncrementButtonStat(DB_STEP_COUNT_BIKE);
+        TryIncrementButtonStat(DB_STEP_COUNT); // step total
+    }
+    else if((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_DASH))
+    {
+        TryIncrementButtonStat(DB_STEP_COUNT_RUN);
+        TryIncrementButtonStat(DB_STEP_COUNT); // step total
+    }
+    else if((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
+    {
+        TryIncrementButtonStat(DB_STEP_COUNT_WALK);
+        TryIncrementButtonStat(DB_STEP_COUNT); // step total
+    }
+}
+
 int ProcessPlayerFieldInput(struct FieldInput *input)
 {
     struct MapPosition position;
@@ -156,6 +185,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
+        DoDoneButtonStepStat();
         IncrementBirthIslandRockStepCount();
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
@@ -448,7 +478,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+    if ((FlagGet(FLAG_BADGE05_GET) == TRUE || (CheckSpeedchoiceOption(EARLYSURF, SURF_ON) && FlagGet(FLAG_BADGE03_GET))) && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
         return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
@@ -463,7 +493,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 
 static bool32 TrySetupDiveDownScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2)
+    if ((FlagGet(FLAG_BADGE07_GET) || CheckSpeedchoiceOption(PLOTLESS, PLOT_KEEP) == FALSE) && TrySetDiveWarp() == 2)
     {
         ScriptContext1_SetupScript(EventScript_UseDive);
         return TRUE;
@@ -473,7 +503,7 @@ static bool32 TrySetupDiveDownScript(void)
 
 static bool32 TrySetupDiveEmergeScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    if ((FlagGet(FLAG_BADGE07_GET) || CheckSpeedchoiceOption(PLOTLESS, PLOT_KEEP) == FALSE) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
         ScriptContext1_SetupScript(EventScript_UseDiveUnderwater);
         return TRUE;

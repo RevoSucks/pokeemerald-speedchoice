@@ -1549,3 +1549,9 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+// SPEEDCHOICE
+static const u8 sDoneButton[] = _(
+    "Ends the current\n"
+    "race. No, you can't\n"
+    "throw it, Keiz.");

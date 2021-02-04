@@ -764,6 +764,8 @@ Movement_FerryDepart: @ 82721F0
 	step_end
 
 EventScript_HideMrBriney:: @ 82721F8
+	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS
+	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
@@ -1060,3 +1062,19 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/AlteringCave_Cave1/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave2/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave3/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave4/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave5/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave6/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave7/scripts.inc"
+
+	.include "data/maps/AlteringCave_Cave8/scripts.inc"

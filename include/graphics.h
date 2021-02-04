@@ -5025,4 +5025,7 @@ extern const u16 gObjectEventPal_May[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
 
+extern const u32 gItemIcon_DoneButton[];
+extern const u32 gItemIconPalette_DoneButton[];
+
 #endif //GUARD_GRAPHICS_H

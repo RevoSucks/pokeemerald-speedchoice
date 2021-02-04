@@ -67,6 +67,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "done_button.h"
 
 #define PLAYER_TRADING_STATE_IDLE 0x80
 #define PLAYER_TRADING_STATE_BUSY 0x81
@@ -356,7 +357,11 @@ static void (*const gMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 // code
 void DoWhiteOut(void)
 {
+    u32 moneyToKeep, moneyLost;
     ScriptContext2_RunNewScript(EventScript_WhiteOut);
+    moneyToKeep = GetMoney(&gSaveBlock1Ptr->money) / 2;
+    moneyLost = GetMoney(&gSaveBlock1Ptr->money) - moneyToKeep;
+    TryAddButtonStatBy(DB_MONEY_LOST, moneyLost);
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -1605,6 +1610,9 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
 
 void CB2_ReturnToField(void)
 {
+    sInSubMenu = FALSE;
+    sInField = TRUE;
+    sInBattle = FALSE;
     if (IsUpdateLinkStateCBActive() == TRUE)
     {
         SetMainCallback2(CB2_ReturnToFieldLink);
