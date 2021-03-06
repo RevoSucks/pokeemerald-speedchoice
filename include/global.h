@@ -473,6 +473,7 @@ struct SpeedchoiceSaveOptions
     u8 earlyBike:1;
     u8 fastEggHatch:1;
     u8 gen7XItems:1;
+    u8 evoEveryLevel:1;
 };
 
 // The struct has to be split in two because neither chunk of block 1 and 2 has enough room left for the full struct.

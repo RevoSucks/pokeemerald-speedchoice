@@ -2863,10 +2863,10 @@ void CalculateMonStats(struct Pokemon *mon)
         else if (currentHP != 0) {
             // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
             currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
-            if (currentHP <= 0)
+            // If we have Evolve Every Level on, we need to ensure base HP dropping does
+            // NOT trigger the Pomeg glitch, or bad things will happen.
+            if (CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_ON) == TRUE && currentHP <= 0)
                 currentHP = 1;
-            #endif
         }
         else
             return;

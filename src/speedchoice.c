@@ -20,13 +20,19 @@
 #include "random.h"
 #include "constants/rgb.h"
 
+// A macro was defined here to simplify the row used in Palette calls, but I haven't
+// used this yet.
 #define PLTTROW(row) ((row) * (0x20))
 
-extern u16 sOptionMenuText_Pal[16]; // sUnknown_0855C604
-extern u16 sOptionMenuBg_Pal[1]; // sUnknown_0855C6A0
+// We reuse the option menu and main menu palette data to simplfy things.
+extern u16 sOptionMenuText_Pal[16];
+extern u16 sOptionMenuBg_Pal[1];
 extern u16 sMainMenuTextPal[16];
 
-// Window Ids
+// ----------------------------------------------
+// Window IDs enumeration for the defined
+// Speedchoice menu templates.
+// ----------------------------------------------
 enum
 {
     SPD_WIN_TEXT_OPTION,
@@ -35,6 +41,9 @@ enum
     SPD_WIN_YESNO,
 };
 
+// ----------------------------------------------
+// BG TEMPLATES
+// ----------------------------------------------
 const struct BgTemplate sSpeedchoiceMenuBgTemplates[] =
 {
    {
@@ -55,7 +64,7 @@ const struct BgTemplate sSpeedchoiceMenuBgTemplates[] =
        .priority = 2,
        .baseTile = 0
    },
-   // 0x000001ec
+   // 0x000001ec (I forget why this was put here)
    {
        .bg = 2,
        .charBaseIndex = 1,
@@ -76,20 +85,29 @@ const struct WindowTemplate sSpeedchoiceMenuWinTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-// Window Ids
+// Deprecated ID. This may have been a leftover copy paste from the option menu.
 enum
 {
+    // DEPRECATED
     WIN_TEXT_OPTION,
     WIN_OPTIONS
 };
 
+
+/* ----------------------------------------------- */
+/* SPEEDCHOICE MENU TEXT (System Text)             */
+/* ----------------------------------------------- */
 const u8 gSystemText_TerminatorS[] = _("{COLOR RED}$");
 
-// HEADER
+/* ----------------------------------------------- */
+/* SPEEDCHOICE MENU TEXT (Header Text)             */
+/* ----------------------------------------------- */
 const u8 gSpeedchoiceTextHeader[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SPEEDCHOICE MENU");
-const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.1.7");
+const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.1.8");
 
-// OPTION CHOICES
+/* ----------------------------------------------- */
+/* SPEEDCHOICE MENU TEXT (Option Choices)          */
+/* ----------------------------------------------- */
 const u8 gSpeedchoiceTextYes[]    = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}YES");
 const u8 gSpeedchoiceTextNo[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NO");
 
@@ -113,6 +131,10 @@ const u8 gSpeedchoiceTextNone[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NONE");
 
 const u8 gSpeedchoiceTextTutor[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}TUTOR");
 const u8 gSpeedchoiceTextHM05[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HM05");
+
+/* ----------------------------------------------- */
+/* SPEEDCHOICE MENU TEXT (Option Names)            */
+/* ----------------------------------------------- */
 
 // PAGE 1
 const u8 gSpeedchoiceOptionPreset[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}PRESET");
@@ -145,6 +167,7 @@ const u8 gSpeedchoiceOptionFastEggHatch[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}
 
 // PAGE 5
 const u8 gSpeedchoiceOptionGen7XItems[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}GEN 7 X ITEMS");
+const u8 gSpeedchoiceOptionEvoEveryLv[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EVO EVERY LV");
 
 // CONSTANT OPTIONS
 const u8 gSpeedchoiceOptionPage[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}PAGE");
@@ -153,6 +176,10 @@ const u8 gSpeedchoiceOptionStartGame[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}STA
 // ARROWS
 const u8 gSpeedchoiceOptionLeftArrow[] = _("{COLOR RED}{SHADOW LIGHT_RED}{LEFT_ARROW}");
 const u8 gSpeedchoiceOptionRightArrow[] = _("{COLOR RED}{SHADOW LIGHT_RED}{RIGHT_ARROW}");
+
+/* ----------------------------------------------- */
+/* SPEEDCHOICE MENU TEXT (Tooltip Text)            */
+/* ----------------------------------------------- */
 
 // INTRODUCTION
 const u8 gSpeedchoiceTooltipExplanation[] = _("This is the Speedchoice menu where\nvarious options can be selected.\pTo get an explanation of each option,\npress SELECT when over the option.");
@@ -171,8 +198,8 @@ const u8 gSpeedchoiceTooltipNewWildEnc[] = _("Intended to be used with\nthe rand
 const u8 gSpeedchoiceTooltipEarlyFly[] = _("Recieve HM02 instead of\nItemfinder at Rival 2.\pAllows use of Fly without use of\nGym 6's badge.");
 const u8 gSpeedchoiceTooltipRunEverywhere[] = _("Allows the Running Shoes to\nbe used anywhere, including\pinside of houses.\pAlso allows bike in most places.");
 const u8 gSpeedchoiceTooltipMemeIsland[] = _("Mirage Island always appears.");
-const u8 gSpeedchoiceTooltipBetterMarts[] = _("Improves the item selections\nof many Pokemon marts.\pAdds repels to Oldale Mart.\pAdds repels and super repels to\nMauville Mart.\pAdds X Specials to Rustboro\nMart.");
-const u8 gSpeedchoiceTooltipGoodEarlyWilds[] = _("SAME: Depending on the\nrandomizer check value, wild\pencounters in the grass for\npokemon below lv 10 will have\ptheir final evolution.\pRAND: If they have a branching\nevolution, it will be randomly\pgenerated instead of being static.");
+const u8 gSpeedchoiceTooltipBetterMarts[] = _("Improves the item selections\nof many {PKMN} marts.\pAdds repels to Oldale Mart.\pAdds repels and super repels to\nMauville Mart.\pAdds X Specials to Rustboro\nMart.");
+const u8 gSpeedchoiceTooltipGoodEarlyWilds[] = _("SAME: Depending on the\nrandomizer check value, wild\pencounters in the grass for\n{PKMN} below lv 10 will have\ptheir final evolution.\pRAND: If they have a branching\nevolution, it will be randomly\pgenerated instead of being static.");
 const u8 gSpeedchoiceTooltipEarlySurf[] = _("Switches the locations of\nHM04 and HM03.\pUse of Surf requirement only needs\nWattson's Gym Badge.\pIn addition, Steven post-Fortree\nwill not spawn until after GYM 5.");
 const u8 gSpeedchoiceTooltipNiceMenuOrder[] = _("Swaps the location of SUMMARY and\nfield moves in party menu.\palso swaps CHECK TAG and USE\nin the berry bag.\pON: Fields moves and berry USE are first.\nOFF: SUMMARY and CHECK TAG are first.");
 const u8 gSpeedchoiceTooltipEasyFalseSwipe[] = _("Makes FALSE SWIPE guaranteed\nOFF: Vanilla game behavior\pTUTOR: The tutor in Slateport teaches\nFALSE SWIPE.\pHM05: Replaces HM05 FLASH with\nHM05 FALSE SWIPE.");
@@ -180,6 +207,7 @@ const u8 gSpeedchoiceTooltipFastCatch[] = _("All Pokeballs are guaranteed to cat
 const u8 gSpeedchoiceTooltipEarlyBike[] = _("Start game with Bicycle.");
 const u8 gSpeedchoiceTooltipFastEggHatch[] = _("Makes eggs hatch quickly.");
 const u8 gSpeedchoiceTooltipGen7XItems[] = _("Stat boost +2 instead of +1.");
+const u8 gSpeedchoiceTooltipEvoEveryLv[] = _("{PKMN} randomly evolve into\nanother species every lv.\pPomeg glitch is corrected to\navoid HP underflow during evolution.");
 
 // START GAME
 const u8 gSpeedchoiceStartGameText[] = _("CV: {STR_VAR_1}\nStart the game?");
@@ -199,6 +227,9 @@ const u8 gPresetNames[][20] = {
 
 // use local config optionConfig[0] for preset!
 
+// -------------------------
+// Enumeration for Preset.
+// -------------------------
 enum {
     PRESET_VANILLA,
     PRESET_BINGO,
@@ -206,8 +237,13 @@ enum {
     PRESET_RACE
 };
 
+// When creating the task that manages the speedchoice menu, store the task ID in RAM to
+// be used later when destroying the task.
 static EWRAM_DATA int gSpeedchoiceTaskId = 0;
 
+// ----------------------------------------------------------------
+// Preset Data for Speedchoice Menu
+// ----------------------------------------------------------------
 static const u8 gPresetVanilla[CURRENT_OPTIONS_NUM] = {
     PRESET_VANILLA,         // PRESET
     0xFF,                   // (Reserved for trainer name)
@@ -230,7 +266,8 @@ static const u8 gPresetVanilla[CURRENT_OPTIONS_NUM] = {
     FAST_CATCH_OFF,         // FAST_CATCH
     EARLY_BIKE_NO,          // EARLY_BIKE
     FAST_EGG_HATCH_NO,      // FAST_EGG_HATCH
-    GEN_7_X_ITEMS_OFF       // GEN_7_X_ITEMS
+    GEN_7_X_ITEMS_OFF,      // GEN_7_X_ITEMS
+    EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
 
 static const u8 gPresetBingo[CURRENT_OPTIONS_NUM] = {
@@ -255,7 +292,8 @@ static const u8 gPresetBingo[CURRENT_OPTIONS_NUM] = {
     FAST_CATCH_OFF,         // FAST_CATCH
     EARLY_BIKE_YES,         // EARLY_BIKE
     FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
-    GEN_7_X_ITEMS_ON        // GEN_7_X_ITEMS
+    GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
+    EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
 
 static const u8 gPresetCEA[CURRENT_OPTIONS_NUM] = {
@@ -280,7 +318,8 @@ static const u8 gPresetCEA[CURRENT_OPTIONS_NUM] = {
     FAST_CATCH_ON,          // FAST_CATCH
     EARLY_BIKE_YES,         // EARLY_BIKE
     FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
-    GEN_7_X_ITEMS_ON        // GEN_7_X_ITEMS
+    GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
+    EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
 
 static const u8 gPresetRace[CURRENT_OPTIONS_NUM] = {
@@ -305,9 +344,13 @@ static const u8 gPresetRace[CURRENT_OPTIONS_NUM] = {
     FAST_CATCH_OFF,         // FAST_CATCH
     EARLY_BIKE_YES,         // EARLY_BIKE
     FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
-    GEN_7_X_ITEMS_ON        // GEN_7_X_ITEMS
+    GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
+    EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
 
+/*
+ * Fetch the Preset array from the set Preset ID.
+ */
 const u8 *GetPresetPtr(int presetID) {
     switch(presetID) {
         case PRESET_VANILLA:
@@ -322,6 +365,9 @@ const u8 *GetPresetPtr(int presetID) {
     }
 }
 
+// ---------------------------------------
+// Speedchoice menu Option Config data
+// ---------------------------------------
 const struct OptionChoiceConfig OptionChoiceConfigYesNo[MAX_CHOICES] = 
 {
     { 120, (u8 *)&gSpeedchoiceTextYes },
@@ -402,7 +448,11 @@ const struct OptionChoiceConfig OptionChoiceConfigKeepNone[MAX_CHOICES] =
     { -1, NULL }
 };
 
-// this is totally weird, but in order to use ProcessGeneralInput, a struct is needed for page, so, I opt to have a dummy struct which only has the number of choices relevent to the calculation of the selection.
+/*
+ * In order to use ProcessGeneralInput, a struct is needed for page, so, I opt to have a
+ * dummy struct which only has the number of choices relevent to the calculation of the
+ * selection.
+ */
 const struct OptionChoiceConfig OptionChoiceConfigPage[MAX_CHOICES] = 
 {
     { -1, NULL },
@@ -435,54 +485,325 @@ const struct OptionChoiceConfig Arrows[MAX_CHOICES] =
     { -1, NULL }
 };
 
+// ---------------------------------------
+// Speedchoice menu Option data
+// ---------------------------------------
 const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // plus one for page
 {
-    { 4,         ARROW,       gSpeedchoiceOptionPreset,         Arrows,                     gSpeedchoiceTooltipPreset,         TRUE  },
-    { 1,         PLAYER_NAME, gSpeedchoiceOptionName,           OptionChoiceConfigPlayerName, gSpeedchoiceTooltipName,         TRUE  },
-    { 3,         NORMAL,      gSpeedchoiceOptionEXP,            OptionChoiceConfigKeepNone, gSpeedchoiceTooltipEXP,            TRUE  },
-    { 3,         NORMAL,      gSpeedchoiceOptionPlotless,       OptionChoiceConfigSemiFull, gSpeedchoiceTooltipPlotless,       TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionInstantText,    OptionChoiceConfigOnOff,    gSpeedchoiceTooltipInstantText,    TRUE },
-    { 4,         NORMAL,      gSpeedchoiceOptionSpinners,       OptionChoiceConfigNerfKeep, gSpeedchoiceTooltipSpinners,       TRUE },
-    { 3,         NORMAL,      gSpeedchoiceOptionMaxVision,      OptionChoiceConfigSaneHell, gSpeedchoiceTooltipMaxVision,      TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionNerfRoxanne,    OptionChoiceConfigYesNo,    gSpeedchoiceTooltipNerfRoxanne,    TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionSuperBike,      OptionChoiceConfigOnOff,    gSpeedchoiceTooltipSuperBike,      TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionNewWildEnc,     OptionChoiceConfigOnOff,    gSpeedchoiceTooltipNewWildEnc,     TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionEarlyFly,       OptionChoiceConfigYesNo,    gSpeedchoiceTooltipEarlyFly,       TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionRunEverywhere,  OptionChoiceConfigOnOff,    gSpeedchoiceTooltipRunEverywhere,  TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionMemeIsland,     OptionChoiceConfigYesNo,    gSpeedchoiceTooltipMemeIsland,     TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionBetterMarts,    OptionChoiceConfigOnOff,    gSpeedchoiceTooltipBetterMarts,    TRUE },
-    { 3,         NORMAL,      gSpeedchoiceOptionGoodEarlyWilds, OptionChoiceConfigOffRand,  gSpeedchoiceTooltipGoodEarlyWilds, TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionEarlySurf,      OptionChoiceConfigOnOff,    gSpeedchoiceTooltipEarlySurf,      TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionNiceMenuOrder,  OptionChoiceConfigOnOff,    gSpeedchoiceTooltipNiceMenuOrder,  TRUE },
-    { 3,         NORMAL,      gSpeedchoiceOptionEasyFalseSwipe, OptionChoiceConfigOffTutorHM, gSpeedchoiceTooltipEasyFalseSwipe, TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionFastCatch,      OptionChoiceConfigOnOff,    gSpeedchoiceTooltipFastCatch,  TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionEarlyBike,      OptionChoiceConfigYesNo,    gSpeedchoiceTooltipEarlyBike,  TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionFastEggHatch,   OptionChoiceConfigYesNo,    gSpeedchoiceTooltipFastEggHatch,  TRUE },
-    { 2,         NORMAL,      gSpeedchoiceOptionGen7XItems,     OptionChoiceConfigOnOff,    gSpeedchoiceTooltipGen7XItems,  TRUE },
-    { MAX_PAGES, NORMAL,      gSpeedchoiceOptionPage,           OptionChoiceConfigPage,     NULL,                              TRUE }
+    // ----------------------------------
+    // PRESET OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 4,
+        /* Option Type    */ ARROW,
+        /* Option Preset  */ gSpeedchoiceOptionPreset,
+        /* Option Text    */ Arrows,
+        /* Option Tooltip */ gSpeedchoiceTooltipPreset,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // PLAYER NAME
+    // ----------------------------------
+    { 
+        /* Option Count   */ 1,
+        /* Option Type    */ PLAYER_NAME,
+        /* Option Preset  */ gSpeedchoiceOptionName,
+        /* Option Text    */ OptionChoiceConfigPlayerName,
+        /* Option Tooltip */ gSpeedchoiceTooltipName,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EXP OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 3,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEXP,
+        /* Option Text    */ OptionChoiceConfigKeepNone,
+        /* Option Tooltip */ gSpeedchoiceTooltipEXP,            
+        /* Option Usable  */ TRUE  
+    },
+    // ----------------------------------
+    // PLOTLESS OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 3,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionPlotless,
+        /* Option Text    */ OptionChoiceConfigSemiFull,
+        /* Option Tooltip */ gSpeedchoiceTooltipPlotless,
+        /* Option Usable  */ TRUE 
+    },
+    // ----------------------------------
+    // INSTANT TEXT OPTION
+    // ----------------------------------
+    {
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionInstantText,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipInstantText,
+        /* Option Usable  */ TRUE 
+    },
+    // ----------------------------------
+    // SPINNERS OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 4,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionSpinners,
+        /* Option Text    */ OptionChoiceConfigNerfKeep,
+        /* Option Tooltip */ gSpeedchoiceTooltipSpinners,
+        /* Option Usable  */ TRUE 
+    },
+    // ----------------------------------
+    // MAX VISION OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 3,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionMaxVision,
+        /* Option Text    */ OptionChoiceConfigSaneHell,
+        /* Option Tooltip */ gSpeedchoiceTooltipMaxVision,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // NERF ROXANNE OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionNerfRoxanne,
+        /* Option Text    */ OptionChoiceConfigYesNo,
+        /* Option Tooltip */ gSpeedchoiceTooltipNerfRoxanne,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // SUPER BIKE OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionSuperBike,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipSuperBike,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // NEW WILD ENC OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionNewWildEnc,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipNewWildEnc,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EARLY FLY OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEarlyFly,
+        /* Option Text    */ OptionChoiceConfigYesNo,
+        /* Option Tooltip */ gSpeedchoiceTooltipEarlyFly,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // RUN EVERYWHERE OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionRunEverywhere,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipRunEverywhere,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // MEME ISLAND OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionMemeIsland,
+        /* Option Text    */ OptionChoiceConfigYesNo,
+        /* Option Tooltip */ gSpeedchoiceTooltipMemeIsland,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // BETTER MARTS OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionBetterMarts,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipBetterMarts,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // GOOD EARLY WILDS OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 3,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionGoodEarlyWilds,
+        /* Option Text    */ OptionChoiceConfigOffRand,
+        /* Option Tooltip */ gSpeedchoiceTooltipGoodEarlyWilds,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EARLY SURF OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEarlySurf,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipEarlySurf,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // PARTY MENU OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionNiceMenuOrder,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipNiceMenuOrder,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EASY FALSE SWIPE OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 3,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEasyFalseSwipe,
+        /* Option Text    */ OptionChoiceConfigOffTutorHM,
+        /* Option Tooltip */ gSpeedchoiceTooltipEasyFalseSwipe,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // FAST CATCH OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionFastCatch,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipFastCatch,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EARLY BIKE OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEarlyBike,
+        /* Option Text    */ OptionChoiceConfigYesNo,
+        /* Option Tooltip */ gSpeedchoiceTooltipEarlyBike,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // FAST EGG HATCHING OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionFastEggHatch,
+        /* Option Text    */ OptionChoiceConfigYesNo,
+        /* Option Tooltip */ gSpeedchoiceTooltipFastEggHatch,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // GEN 7 X ITEMS OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionGen7XItems,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipGen7XItems,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // EVO EVERY LEVEL OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ 2,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionEvoEveryLv,
+        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Tooltip */ gSpeedchoiceTooltipEvoEveryLv,
+        /* Option Usable  */ TRUE
+    },
+    // ----------------------------------
+    // PAGE STATIC OPTION
+    // ----------------------------------
+    { 
+        /* Option Count   */ MAX_PAGES,
+        /* Option Type    */ NORMAL,
+        /* Option Preset  */ gSpeedchoiceOptionPage,
+        /* Option Text    */ OptionChoiceConfigPage,
+        /* Option Tooltip */ NULL,
+        /* Option Usable  */ TRUE
+    }
 };
 
-EWRAM_DATA u8 gStoredPageNum = 0; // default is 0, only renders options again if it's different than the task data's page number.
+// To avoid redrawing the page info every frame, we store the active page number
+// and compare it to the task's page number. We only redraw if they are different
+// and update accordingly.
+EWRAM_DATA u8 gStoredPageNum = 0;
+
+// See SpeedchoiceConfigStruct documentation in speedchoice.h.
 EWRAM_DATA struct SpeedchoiceConfigStruct gLocalSpeedchoiceConfig = {0};
+
+// See MapObjectTimerBackup documentation in speedchoice.h.
 EWRAM_DATA struct MapObjectTimerBackup gMapObjectTimerBackup[MAX_SPRITES] = {0};
-EWRAM_DATA bool8 gLastMenuWasSubmenu = {0};
-EWRAM_DATA bool8 gPokedexAreaScreenFlag = {0};
+
+// Deprecated. Was going to be used for the timer backup hack, but a better
+// implementation was found.
+EWRAM_DATA bool8 gLastMenuWasSubmenu = {0}; // DEPRECATED
+
+// Deprecated. Was going to be used for the Pokedex area screen beep change,
+// but a better implementation was found.
+EWRAM_DATA bool8 gPokedexAreaScreenFlag = {0}; // DEPRECATED
+
+// Used to signal that the page must redraw in cases where it is needed such as
+// updating the Preset.
 EWRAM_DATA bool8 gForceUpdate = FALSE;
 
+// Stores the written player name in the options menu until it is flushed to the
+// Save Block.
 EWRAM_DATA u8 gTempPlayerName[PLAYER_NAME_LENGTH + 1] = {0};
 
+// -------------------------------------
+// PROTOTYPES
+// -------------------------------------
 u8 GetPageDrawCount(u8 page);
 void SetPageIndexFromTrueIndex(u8 taskId, s16 index);
 
+/*
+ * When initializing the menu for the first time or setting a preset, this function
+ * is invoked to set the local config and save block data from the preset or default
+ * preset.
+ */
 void SetOptionChoicesAndConfigFromPreset(const u8 *preset)
 {
     u8 i;
 
-    // set the local config for the current menu.
+    // set the local config for the current menu. Do NOT overwrite the preset!
     for(i = 1; i < CURRENT_OPTIONS_NUM; i++)
         gLocalSpeedchoiceConfig.optionConfig[i] = preset[i];
 
-    // this would be a for loop, but i want to use the fewest bits possible to avoid shifting RAM too much: hence the ugly per-option saving.
+    // this would be a for loop, but i want to use the fewest bits possible to
+    // avoid shifting RAM too much: hence the ugly per-option saving.
     gSaveBlock2Ptr->speedchoiceConfig.expsystem = preset[EXPMATH];
     gSaveBlock2Ptr->speedchoiceConfig.plotless = preset[PLOTLESS];
     gSaveBlock2Ptr->speedchoiceConfig.instantText = preset[INSTANTTEXT];
@@ -503,8 +824,15 @@ void SetOptionChoicesAndConfigFromPreset(const u8 *preset)
     gSaveBlock2Ptr->speedchoiceConfig.earlyBike = preset[EARLY_BIKE];
     gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch = preset[FAST_EGG_HATCH];
     gSaveBlock2Ptr->speedchoiceConfig.gen7XItems = preset[GEN_7_X_ITEMS];
+    gSaveBlock2Ptr->speedchoiceConfig.evoEveryLevel = preset[EVO_EVERY_LEVEL];
 }
 
+/*
+ * This option is used to check the currently set option data and is used when doing
+ * speedchoice checks. (Is the EXP option set to BWEXP, etc)
+ *
+ * See the speedchoice.h enums for the values to pass here.
+ */
 bool8 CheckSpeedchoiceOption(u8 option, u8 selection)
 {
     switch(option)
@@ -549,11 +877,16 @@ bool8 CheckSpeedchoiceOption(u8 option, u8 selection)
             return gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch == selection;
         case GEN_7_X_ITEMS:
             return gSaveBlock2Ptr->speedchoiceConfig.gen7XItems == selection;
+        case EVO_EVERY_LEVEL:
+            return gSaveBlock2Ptr->speedchoiceConfig.evoEveryLevel == selection;
         default:
             return FALSE;
     }
 }
 
+/*
+ * Invoked to locally format the passed text and add it to the text printer to render it.
+ */
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 {
     u8 dst[16];
@@ -569,11 +902,15 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     }
 
     dst[i] = EOS;
-    AddTextPrinterParameterized(WIN_OPTIONS, 1, dst, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, dst, x, y, TEXT_SPEED_FF, NULL);
 }
 
 void DrawPageOptions(u8);
 
+/*
+ * This is used to handle the inputs per option, not the Speedchoice menu inputs overall.
+ * See Task_SpeedchoiceMenuProcessInput for that.
+ */
 static u8 ProcessGeneralInput(struct SpeedchoiceOption *option, u8 selection, bool8 indexedToOne) // if indexedToOne is true (1), i can conveniently use it as the selection anchor.
 {
     if(gMain.newKeys & DPAD_RIGHT)
@@ -612,7 +949,9 @@ static u8 ProcessGeneralInput(struct SpeedchoiceOption *option, u8 selection, bo
     return selection;
 }
 
-// code
+// --------------------------------------------
+// Standard callbacks for Main and VBlankCB.
+// --------------------------------------------
 static void MainCB2(void)
 {
     RunTasks();
@@ -628,6 +967,8 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+// We dim the whole menu except the header and currently selected option. This is invoked when the menu
+// is initialized or re-initialized.
 void HighlightHeaderBox(void)
 {
     SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(17, 223));
@@ -637,6 +978,7 @@ void HighlightHeaderBox(void)
 //This version uses addition '+' instead of OR '|'.
 #define WIN_RANGE_(a, b) (((a) << 8) + (b))
 
+// Same as above, but for the option instead.
 static void HighlightOptionMenuItem(u8 index)
 {
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, 224));
@@ -645,7 +987,8 @@ static void HighlightOptionMenuItem(u8 index)
 
 void CB2_InitSpeedchoice(void);
 
-// HACK!!!
+// The Options menu relies on a CB2 init while New Game relied on a task switchover. As a hack, I
+// used this to transition it over. It's a bit messy but whatever.
 void Task_InitSpeedchoiceMenu(u8 taskId)
 {
     SetMainCallback2(CB2_InitSpeedchoice);
@@ -658,6 +1001,9 @@ static void sub_80BB154(void);
 
 extern const u8 *const gFemalePresetNames[];
 
+/*
+ * Initialize the default player name similar to how Birch intro does it.
+ */
 void FormatInitialTempName(u8 nameId)
 {
     const u8* name;
@@ -670,8 +1016,13 @@ void FormatInitialTempName(u8 nameId)
     gTempPlayerName[7] = 0xFF;
 }
 
+// Used to signal to avoid redrawing specific stuff. This is used for the naming screen switchover
+// and the first time tooltip.
 EWRAM_DATA bool32 gAlreadyLoaded = FALSE;
 
+/*
+ * Initialize the CB2 Speedchoice Menu.
+ */
 void CB2_InitSpeedchoice(void)
 {
     switch (gMain.state)
@@ -812,11 +1163,14 @@ void CB2_InitSpeedchoice(void)
     }
 }
 
+// from charmap.txt
 #define CHAR_0 0xA1
 #define CHAR_PERCENT 0x5B
 
+// Replaces MENUOPTIONCOORDS in speedchoice.h.
 #define NEWMENUOPTIONCOORDS(i)  ((i * 16) + 2)
 
+// Deprecated function. Originally was going to be used to select % of experience, I think.
 static u8 *FormatPercentNumber(char *text, u8 selection, u8 x, u8 y, u8 style) // style is unused
 {
     memcpy(text, gSystemText_TerminatorS, 3); // copy the palette control code.
@@ -829,6 +1183,7 @@ static u8 *FormatPercentNumber(char *text, u8 selection, u8 x, u8 y, u8 style) /
     text[7] = EOS;
 }
 
+// Render the page number.
 static void DrawPageChoice(u8 selection)
 {
     u8 text[5];
@@ -841,13 +1196,14 @@ static void DrawPageChoice(u8 selection)
     AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, text, 40, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
 }
 
-// used for all but page.
+// Render the text for the choices for each option.
 static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u8 row, bool8 isPercent)
 {
     u8 styles[MAX_CHOICES];
     u8 numChoices = option->optionCount;
     u8 i;
 
+    // Format the array.
     if(numChoices < MAX_CHOICES)
     {
         for(i = 0; i < numChoices; i++)
@@ -856,6 +1212,7 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
         styles[selection] = 1;
     }
 
+    // Arrows needs special handling for positioning the arrows and text.
     if(option->optionType == ARROW)
     {
         u8 text[8];
@@ -869,6 +1226,7 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
         DrawOptionMenuChoice(Arrows[1].string, x_right, y, 0); // right arrow
         DrawOptionMenuChoice(gPresetNames[gLocalSpeedchoiceConfig.optionConfig[0]], x_preset, y, 0);
     }
+    // Player name needs special handling as well.
     else if(option->optionType == PLAYER_NAME)
     {
         u8 i;
@@ -894,6 +1252,7 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
         bufferedName[13] = EOS;
         DrawOptionMenuChoice(bufferedName, x_preset, y, 0);
     }
+    // Assume everything else is a normal option render.
     else
     {
         for(i = 0; i < numChoices; i++)
@@ -910,6 +1269,9 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
 static void Task_SpeedchoiceMenuProcessInput(u8);
 static void DrawTooltip(u8 taskId, const u8 *str, int speed, bool32 isYesNo);
 
+/*
+ * Fade in until it's time to start processing inputs.
+ */
 static void Task_SpeedchoiceMenuFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -918,7 +1280,9 @@ static void Task_SpeedchoiceMenuFadeIn(u8 taskId)
     }
 }
 
-// lastOrFirst, TRUE means last, FALSE means first available
+/*
+ * Get the true index of the first or last page option depending on the enum passed.
+ */
 u8 GetPageOptionTrueIndex(bool8 lastOrFirst, u8 page)
 {
     if(lastOrFirst == LAST)
@@ -927,7 +1291,9 @@ u8 GetPageOptionTrueIndex(bool8 lastOrFirst, u8 page)
         return (OPTIONS_PER_PAGE * (page - 1));
 }
 
-// same as above, but return the page index.
+/*
+ * Same as above, but return the page index.
+ */
 u8 GetPageOptionPageIndex(bool8 lastOrFirst, u8 page)
 {
     return (lastOrFirst) ? GetPageDrawCount(page) : 1;
@@ -935,6 +1301,9 @@ u8 GetPageOptionPageIndex(bool8 lastOrFirst, u8 page)
 
 extern void ClearMainMenuWindowTilemap(const struct WindowTemplate *template);
 
+/*
+ * Finish rendering the tooltip by holding until it has completed rendering.
+ */
 static void Task_WaitForTooltip(u8 taskId)
 {
     RunTextPrinters();
@@ -953,6 +1322,9 @@ static void Task_WaitForTooltip(u8 taskId)
 
 extern void DrawMainMenuWindowBorder(const struct WindowTemplate*, u16);
 
+/*
+ * Initiate the rendering for the tooltip.
+ */
 static void DrawTooltip(u8 taskId, const u8 *str, int speed, bool32 isYesNo)
 {
     FillWindowPixelBuffer(SPD_WIN_TOOLTIP, 0x11);
@@ -974,6 +1346,7 @@ static void DrawTooltip(u8 taskId, const u8 *str, int speed, bool32 isYesNo)
         gTasks[taskId].func = Task_WaitForTooltip;
 }
 
+// Count leading zeroes. Self-explanatory.
 u32 CountLeadingZeros(u32 value)
 {
     u32 result = 0;
@@ -990,12 +1363,15 @@ u32 CountLeadingZeros(u32 value)
     return result;
 }
 
+// Convert number of options to bits that are used. Used to assist calculating CV.
 u8 GetNumBitsUsed(u8 numOptions)
 {
     if(numOptions < 2) { return 1; }
     return 32 - CountLeadingZeros(numOptions - 1);
 }
 
+// Calculate the Check Value given a given option configuration. Used for verifying ROM
+// check value + option config before starting a run/race.
 u32 CalculateCheckValue(u8 taskId)
 {
     u32 checkValue;
@@ -1021,11 +1397,13 @@ u32 CalculateCheckValue(u8 taskId)
     return checkValue;
 }
 
+// Flush the settings to the Save Block.
 static void SaveSpeedchoiceOptions(u8 taskId)
 {
     u8 i;
 
-    // once again i would prefer to use an extensible for loop here, but the options being bitfields means that it cannot currently be done.
+    // once again i would prefer to use an extensible for loop here, but the options
+    // being bitfields means that it cannot currently be done.
     gSaveBlock2Ptr->speedchoiceConfig.expsystem = gLocalSpeedchoiceConfig.optionConfig[EXPMATH];
     gSaveBlock2Ptr->speedchoiceConfig.plotless = gLocalSpeedchoiceConfig.optionConfig[PLOTLESS];
     gSaveBlock2Ptr->speedchoiceConfig.instantText = gLocalSpeedchoiceConfig.optionConfig[INSTANTTEXT];
@@ -1046,6 +1424,7 @@ static void SaveSpeedchoiceOptions(u8 taskId)
     gSaveBlock2Ptr->speedchoiceConfig.earlyBike = gLocalSpeedchoiceConfig.optionConfig[EARLY_BIKE];
     gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch = gLocalSpeedchoiceConfig.optionConfig[FAST_EGG_HATCH];
     gSaveBlock2Ptr->speedchoiceConfig.gen7XItems = gLocalSpeedchoiceConfig.optionConfig[GEN_7_X_ITEMS];
+    gSaveBlock2Ptr->speedchoiceConfig.evoEveryLevel = gLocalSpeedchoiceConfig.optionConfig[EVO_EVERY_LEVEL];
 
     // write the playername.
     for (i = 0; i < PLAYER_NAME_LENGTH; i++) {
@@ -1057,6 +1436,10 @@ static void SaveSpeedchoiceOptions(u8 taskId)
 extern const struct BgTemplate sMainMenuBgTemplates[];
 extern void Task_NewGameBirchSpeech_Init(u8 taskId);
 
+/*
+ * Complete the fade out of the speedchoice menu and then clear the menu data and
+ * jump to Birch Intro.
+ */
 static void Task_SpeedchoiceMenuFadeOut(u8 taskId)
 {
     if(!gPaletteFade.active)
@@ -1110,6 +1493,9 @@ static void Task_SpeedchoiceMenuFadeOut(u8 taskId)
     }
 }
 
+/*
+ * Prompt the Yes/No menu choice to determine if the run/race is started.
+ */
 static void Task_AskToStartGame(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
@@ -1134,6 +1520,10 @@ static void Task_AskToStartGame(u8 taskId)
     }
 }
 
+/*
+ * This might be incorrectly named, but this is the function to initialize the Yes/No for start game.
+ * The flushing of the options to the Save Block may have been done here originally.
+ */
 static void Task_SpeedchoiceMenuSave(u8 taskId)
 {
     ConvertIntToHexStringN(gStringVar1, CalculateCheckValue(taskId), STR_CONV_MODE_LEADING_ZEROS, 8);
@@ -1144,6 +1534,9 @@ static void Task_SpeedchoiceMenuSave(u8 taskId)
     gTasks[taskId].func = Task_AskToStartGame;
 }
 
+/*
+ * Fade out Task function to initialize naming screen.
+ */
 void Task_SpeedchoiceMenuFadeOutToNamingScreen(u8 taskId)
 {
     if(!gPaletteFade.active)
@@ -1154,6 +1547,9 @@ void Task_SpeedchoiceMenuFadeOutToNamingScreen(u8 taskId)
     }
 }
 
+/*
+ * General processor for the input on the speedchoice menu.
+ */
 static void Task_SpeedchoiceMenuProcessInput(u8 taskId)
 {
 	if(!gAlreadyLoaded)
@@ -1229,7 +1625,7 @@ static void Task_SpeedchoiceMenuProcessInput(u8 taskId)
                 break;
             case PAGE:
                 gLocalSpeedchoiceConfig.pageNum = ProcessGeneralInput((struct SpeedchoiceOption *)&SpeedchoiceOptions[CURRENT_OPTIONS_NUM], gLocalSpeedchoiceConfig.pageNum, TRUE);
-                //DrawPageChoice(gLocalSpeedchoiceConfig.pageNum); Depreciated.
+                //DrawPageChoice(gLocalSpeedchoiceConfig.pageNum); Deprecated.
                 if(gLocalSpeedchoiceConfig.pageNum != gStoredPageNum) // only redraw if the page updates!
                 {
                     DrawPageOptions(gLocalSpeedchoiceConfig.pageNum);
@@ -1243,20 +1639,23 @@ static void Task_SpeedchoiceMenuProcessInput(u8 taskId)
     gTasks[taskId].data[0]++; // arrow timer
 }
 
+// Self-explanatory. Draws the header window.
 static void DrawHeaderWindow(void)
 {
-    FillWindowPixelBuffer(WIN_TEXT_OPTION, 0x11);
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, 1, gSpeedchoiceTextHeader, 4, 1, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, 1, gSpeedchoiceCurrentVersion, 172, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(WIN_TEXT_OPTION, 3);
+    FillWindowPixelBuffer(SPD_WIN_TEXT_OPTION, 0x11);
+    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, 1, gSpeedchoiceTextHeader, 4, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, 1, gSpeedchoiceCurrentVersion, 172, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(SPD_WIN_TEXT_OPTION, 3);
 }
 
+// Renders the frame for the options and choices window.
 void DrawOptionsAndChoicesWindow(void)
 {
-    FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
-    CopyWindowToVram(WIN_OPTIONS, 3);
+    FillWindowPixelBuffer(SPD_WIN_OPTIONS, 0x11);
+    CopyWindowToVram(SPD_WIN_OPTIONS, 3);
 }
 
+// Self-explanatory.
 u8 GetPageDrawCount(u8 page)
 {
     if ((page * OPTIONS_PER_PAGE) > CURRENT_OPTIONS_NUM)
@@ -1265,13 +1664,15 @@ u8 GetPageDrawCount(u8 page)
     return OPTIONS_PER_PAGE;
 }
 
-// Page is 1-indexed
-void DrawPageOptions(u8 page)
+/*
+ * Given a page number, renders the page options.
+ */
+void DrawPageOptions(u8 page) // Page is 1-indexed
 {
     u8 i;
     u8 drawCount = GetPageDrawCount(page);
 
-    FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
+    FillWindowPixelBuffer(SPD_WIN_OPTIONS, 0x11);
 
     // print page options.
     for(i = 0; i < drawCount; i++)
@@ -1279,17 +1680,21 @@ void DrawPageOptions(u8 page)
         struct SpeedchoiceOption *option = (struct SpeedchoiceOption *)&SpeedchoiceOptions[i + (OPTIONS_PER_PAGE * (page - 1))];
         const u8 *string = option->string;
 
-        AddTextPrinterParameterized(WIN_OPTIONS, 1, string, 4, NEWMENUOPTIONCOORDS(i), TEXT_SPEED_FF, NULL);
-        // TODO: Draw on WIN_OPTIONS, if it's broken
+        AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, string, 4, NEWMENUOPTIONCOORDS(i), TEXT_SPEED_FF, NULL);
+        // TODO: Draw on SPD_WIN_OPTIONS, if it's broken
         DrawGeneralChoices(option, gLocalSpeedchoiceConfig.optionConfig[i + ((page-1) * 5)], i, FALSE);
     }
 
-    AddTextPrinterParameterized(WIN_OPTIONS, 1, gSpeedchoiceOptionPage, 4, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(WIN_OPTIONS, 1, gSpeedchoiceOptionStartGame, 4, NEWMENUOPTIONCOORDS(6), TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, gSpeedchoiceOptionPage, 4, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, gSpeedchoiceOptionStartGame, 4, NEWMENUOPTIONCOORDS(6), TEXT_SPEED_FF, NULL);
     DrawPageChoice(gLocalSpeedchoiceConfig.pageNum);
-    CopyWindowToVram(WIN_OPTIONS, 3);
+    CopyWindowToVram(SPD_WIN_OPTIONS, 3);
 }
 
+/*
+ * Given a true index, convert it to the page index so that the general processor function can
+ * set the correctly newly selected option.
+ */
 void SetPageIndexFromTrueIndex(u8 taskId, s16 index) // data is s16.
 {
     if(index == PAGE)
@@ -1300,6 +1705,7 @@ void SetPageIndexFromTrueIndex(u8 taskId, s16 index) // data is s16.
         gLocalSpeedchoiceConfig.pageIndex = (oldmin((index % OPTIONS_PER_PAGE), OPTIONS_PER_PAGE));
 }
 
+// Copied from option menu. Fills the window frames.
 static void sub_80BB154(void)
 {
     //                   bg, tileNum, x,    y,    width, height,  pal

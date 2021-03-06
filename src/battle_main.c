@@ -61,6 +61,7 @@
 #include "constants/trainers.h"
 #include "cable_club.h"
 #include "done_button.h"
+#include "speedchoice.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
@@ -5133,6 +5134,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 static void TryEvolvePokemon(void)
 {
     s32 i;
+    bool8 canStopEvo = TRUE;
 
     while (gLeveledUpInBattle != 0)
     {
@@ -5146,12 +5148,22 @@ static void TryEvolvePokemon(void)
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], 0, levelUpBits);
+                if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_ON) == TRUE)
+                {
+                    species = NationalPokedexNumToSpecies((Random() % NATIONAL_DEX_COUNT) + 1);
+                    canStopEvo = FALSE;
+                }
+                else
+                {
+                    species = GetEvolutionTargetSpecies(&gPlayerParty[i], 0, levelUpBits);
+                    canStopEvo = TRUE;
+                }
+
                 if (species != SPECIES_NONE)
                 {
                     FreeAllWindowBuffers();
                     gBattleMainFunc = WaitForEvoSceneToFinish;
-                    EvolutionScene(&gPlayerParty[i], species, TRUE, i);
+                    EvolutionScene(&gPlayerParty[i], species, canStopEvo, i);
                     return;
                 }
             }
