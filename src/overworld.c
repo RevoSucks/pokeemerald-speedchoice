@@ -68,6 +68,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 #include "done_button.h"
+#include "speedchoice.h"
 
 #define PLAYER_TRADING_STATE_IDLE 0x80
 #define PLAYER_TRADING_STATE_BUSY 0x81
@@ -958,6 +959,8 @@ static u16 GetCenterScreenMetatileBehavior(void)
 
 bool32 Overworld_IsBikingAllowed(void)
 {
+    if(CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
+        return TRUE;
     if (!(gMapHeader.flags & MAP_ALLOW_CYCLING))
         return FALSE;
     else

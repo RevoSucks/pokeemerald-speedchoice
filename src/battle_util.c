@@ -3970,10 +3970,17 @@ static bool32 HasObedientBitSet(u8 battlerId)
 {
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         return TRUE;
+    // ----------------------------------
+    // SPEEDCHOICE CHANGE
+    // ----------------------------------
+    // Do not do Obedience crap for Mew or Deoxys.
+    return TRUE;
+    /*
     if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
         && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
             return TRUE;
     return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_OBEDIENCE, NULL);
+    */
 }
 
 u8 IsMonDisobedient(void)

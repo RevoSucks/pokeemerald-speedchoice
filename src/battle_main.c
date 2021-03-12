@@ -5148,16 +5148,13 @@ static void TryEvolvePokemon(void)
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_ON) == TRUE)
-                {
-                    species = NationalPokedexNumToSpecies((Random() % NATIONAL_DEX_COUNT) + 1);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], 0, levelUpBits);
+
+                // handle forcing evo for speedchoice.
+                if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_OFF) == FALSE)
                     canStopEvo = FALSE;
-                }
                 else
-                {
-                    species = GetEvolutionTargetSpecies(&gPlayerParty[i], 0, levelUpBits);
                     canStopEvo = TRUE;
-                }
 
                 if (species != SPECIES_NONE)
                 {

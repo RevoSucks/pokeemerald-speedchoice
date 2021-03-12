@@ -68,7 +68,10 @@ enum DoneButtonStat
     /*accounted*/ DB_ITEMS_SOLD,
     /*accounted*/ DB_MOVES_LEARNT,
     /*accounted*/ DB_BALLS_THROWN,
-    /*accounted*/ DB_POKEMON_CAUGHT_IN_BALLS
+    /*accounted*/ DB_POKEMON_CAUGHT_IN_BALLS,
+    /*accounted*/ DB_EVOLUTIONS_ATTEMPTED,
+    /*accounted*/ DB_EVOLUTIONS_COMPLETED,
+    /*accounted*/ DB_EVOLUTIONS_CANCELLED
 };
 
 void TryIncrementButtonStat(enum DoneButtonStat stat);

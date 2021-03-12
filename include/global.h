@@ -473,7 +473,7 @@ struct SpeedchoiceSaveOptions
     u8 earlyBike:1;
     u8 fastEggHatch:1;
     u8 gen7XItems:1;
-    u8 evoEveryLevel:1;
+    u8 evoEveryLevel:2;
 };
 
 // The struct has to be split in two because neither chunk of block 1 and 2 has enough room left for the full struct.
@@ -533,6 +533,9 @@ struct DoneButtonStats2
     u16 movesLearnt;
     u16 ballsThrown;
     u16 pokemonCaughtInBalls;
+    u32 evosAttempted;
+    u32 evosCompleted;
+    u32 evosCancelled;
 };
 
 struct SaveBlock2

@@ -2865,7 +2865,7 @@ void CalculateMonStats(struct Pokemon *mon)
             currentHP += newMaxHP - oldMaxHP;
             // If we have Evolve Every Level on, we need to ensure base HP dropping does
             // NOT trigger the Pomeg glitch, or bad things will happen.
-            if (CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_ON) == TRUE && currentHP <= 0)
+            if (CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_OFF) == FALSE && currentHP <= 0)
                 currentHP = 1;
         }
         else
@@ -5402,6 +5402,18 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
+    
+    if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_OFF) == FALSE)
+    {
+        if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_STATIC) == TRUE)
+        {
+            // use the new level as the seed, not the current one.
+            u32 lv = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, 0) + 1;
+            
+            SeedRng((u32)((personality * species) + (lv * species))); // seed with the pokemon's PID with species and LV.
+        }
+        return NationalPokedexNumToSpecies((Random() % NATIONAL_DEX_COUNT) + 1);
+    }
 
     if (heldItem == ITEM_ENIGMA_BERRY)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;

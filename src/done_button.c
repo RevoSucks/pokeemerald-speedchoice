@@ -36,6 +36,9 @@ EWRAM_DATA bool8 sInBattle = FALSE;
 EWRAM_DATA bool8 sInField = FALSE;
 EWRAM_DATA bool8 sInIntro = FALSE;
 
+// In order to track the intro timers, which occur before the Save Block gets initialized,
+// we have a persistent timer state that starts from boot since Save Block is not initialized
+// until slightly later. We add the timers to the save data when the game loads.
 EWRAM_DATA struct FrameTimers gFrameTimers = {0};
 
 
@@ -236,6 +239,15 @@ void TryAddButtonStatBy(enum DoneButtonStat stat, u32 add)
         case DB_POKEMON_CAUGHT_IN_BALLS:
             TRY_INC_GAME_STAT_BY(2, pokemonCaughtInBalls, add, USHRT_MAX);
             break;
+        case DB_EVOLUTIONS_ATTEMPTED:
+            TRY_INC_GAME_STAT_BY(2, evosAttempted, add, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_COMPLETED:
+            TRY_INC_GAME_STAT_BY(2, evosCompleted, add, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_CANCELLED:
+            TRY_INC_GAME_STAT_BY(2, evosCancelled, add, UINT_MAX);
+            break;
     }
 }
 
@@ -394,6 +406,15 @@ void TryIncrementButtonStat(enum DoneButtonStat stat)
             break;
         case DB_POKEMON_CAUGHT_IN_BALLS:
             TRY_INC_GAME_STAT(2, pokemonCaughtInBalls, USHRT_MAX);
+            break;
+        case DB_EVOLUTIONS_ATTEMPTED:
+            TRY_INC_GAME_STAT(2, evosAttempted, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_COMPLETED:
+            TRY_INC_GAME_STAT(2, evosCompleted, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_CANCELLED:
+            TRY_INC_GAME_STAT(2, evosCancelled, UINT_MAX);
             break;
     }
 }
@@ -554,6 +575,15 @@ u32 GetDoneButtonStat(enum DoneButtonStat stat)
         case DB_POKEMON_CAUGHT_IN_BALLS:
             GET_GAME_STAT(2, pokemonCaughtInBalls, USHRT_MAX);
             break;
+        case DB_EVOLUTIONS_ATTEMPTED:
+            GET_GAME_STAT(2, evosAttempted, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_COMPLETED:
+            GET_GAME_STAT(2, evosCompleted, UINT_MAX);
+            break;
+        case DB_EVOLUTIONS_CANCELLED:
+            GET_GAME_STAT(2, evosCancelled, UINT_MAX);
+            break;
     }
 }
 
@@ -637,6 +667,9 @@ const u8 gMiscHeader[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}PLAYER STATS (MISC.
 const u8 gMiscTimesSaved[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}TIMES SAVED: ");
 const u8 gMiscSaveReloads[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SAVE RELOADS: ");
 const u8 gMiscClockResets[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}CLOCK RESETS: ");
+const u8 gMiscEvosAttempted[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EVOS ATTEMPTED: ");
+const u8 gMiscEvosCompleted[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EVOS COMPLETED: ");
+const u8 gMiscEvosCancelled[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EVOS CANCELLED: ");
 
 const u8 gPageText[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}{LEFT_ARROW} PAGE {STR_VAR_1} {RIGHT_ARROW}");
 
@@ -816,9 +849,9 @@ const struct DoneButtonLineItem sLineItems[8][7] = {
         {gMiscTimesSaved, GetStandardButtonStat, DB_SAVE_COUNT},
         {gMiscSaveReloads, GetStandardButtonStat, DB_RELOAD_COUNT},
         {gMiscClockResets, GetStandardButtonStat, DB_CLOCK_RESET_COUNT},
-        {NULL, NULL},
-        {NULL, NULL},
-        {NULL, NULL}
+        {gMiscEvosAttempted, GetStandardButtonStat, DB_EVOLUTIONS_ATTEMPTED},
+        {gMiscEvosCompleted, GetStandardButtonStat, DB_EVOLUTIONS_COMPLETED},
+        {gMiscEvosCancelled, GetStandardButtonStat, DB_EVOLUTIONS_CANCELLED}
     }
 };
 

@@ -103,7 +103,7 @@ const u8 gSystemText_TerminatorS[] = _("{COLOR RED}$");
 /* SPEEDCHOICE MENU TEXT (Header Text)             */
 /* ----------------------------------------------- */
 const u8 gSpeedchoiceTextHeader[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SPEEDCHOICE MENU");
-const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.1.8");
+const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.1.9");
 
 /* ----------------------------------------------- */
 /* SPEEDCHOICE MENU TEXT (Option Choices)          */
@@ -207,7 +207,7 @@ const u8 gSpeedchoiceTooltipFastCatch[] = _("All Pokeballs are guaranteed to cat
 const u8 gSpeedchoiceTooltipEarlyBike[] = _("Start game with Bicycle.");
 const u8 gSpeedchoiceTooltipFastEggHatch[] = _("Makes eggs hatch quickly.");
 const u8 gSpeedchoiceTooltipGen7XItems[] = _("Stat boost +2 instead of +1.");
-const u8 gSpeedchoiceTooltipEvoEveryLv[] = _("{PKMN} randomly evolve into\nanother species every lv.\pPomeg glitch is corrected to\navoid HP underflow during evolution.");
+const u8 gSpeedchoiceTooltipEvoEveryLv[] = _("STATIC: {PKMN} evolve into a random\nbut set species every lv.\pRAND: Same thing as STATIC but\nrandom non-static every lv.");
 
 // START GAME
 const u8 gSpeedchoiceStartGameText[] = _("CV: {STR_VAR_1}\nStart the game?");
@@ -736,10 +736,10 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
     // EVO EVERY LEVEL OPTION
     // ----------------------------------
     { 
-        /* Option Count   */ 2,
+        /* Option Count   */ 3,
         /* Option Type    */ NORMAL,
         /* Option Preset  */ gSpeedchoiceOptionEvoEveryLv,
-        /* Option Text    */ OptionChoiceConfigOnOff,
+        /* Option Text    */ OptionChoiceConfigOffRand,
         /* Option Tooltip */ gSpeedchoiceTooltipEvoEveryLv,
         /* Option Usable  */ TRUE
     },
