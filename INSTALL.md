@@ -10,42 +10,49 @@
 
 Independently from the specific OS, make sure that the `gcc`, `g++`, `make`, `git`, and `libpng-dev` packages or their equivalents are installed and accessible to the development tools that are used by the project (this means that, for example, on Windows, the packages have to be installed in the WSL environment). The package names and installation methods may vary with each OS.
 
-Install the devkitARM toolchain of devkitPro as per [the instructions on their wiki](https://devkitpro.org/wiki/devkitPro_pacman). On Windows, follow the Linux instructions inside WSL as any steps about the Windows installer do not apply.
+# Requirements
 
-**Debian-based distro users:** This applies to Debian, Ubuntu, and similar distros, including in WSL. If necessary, install the `libarchive13`, `pkg-config`, and `gdebi-core` packages to be able to install devkitPro.
+Grab the latest version of [devkitPRO](https://github.com/devkitPro/pacman/releases/latest) from their GitHub that fits your CPU architecture (arm64 or amd64)
 
-**Windows 10 users:** WSL 2 is available in the 1903 release (build 18362) and later, therefore existing WSL 1 and [prerelease WSL](https://docs.microsoft.com/windows/wsl/install-legacy) users are recommended to update. Right-click the Start button or press `Win`+`X`, choose Run, and run `ms-settings:about` to determine the Windows version. Also check Windows Update to make sure your installation is up-to-date.
+**Windows 10 users:** [WSL 2][wsl] is available in the 1903 release (build 18362) and later, therefore existing WSL 1 and [prerelease WSL](https://docs.microsoft.com/windows/wsl/install-legacy) users are recommended to update. Right-click the Start button or press `Win`+`X`, choose Run, and run `ms-settings:about` to determine the Windows version. Also check Windows Update to make sure your installation is up-to-date.
 
-**Windows 7 and 8.1 users:** pret is no longer focusing on support in pokeemerald for [old versions of Windows](https://support.microsoft.com/help/13853) so consider upgrading to a current release of Windows 10 or try a third-party guide like [this one](https://www.pokecommunity.com/showthread.php?t=425246) instead.
+**Debian-based distro users (and Windows users running WSL v2):** This applies to Debian, Ubuntu, and similar distros, including in WSL.
 
+1. Run `sudo apt-get install gcc g++ make git libpng-dev libarchive13 pkg-config gdebi-core`. This grabs all the requirements to move forward
+2. Run `sudo gdebi devkitpro-pacman.[arch].deb`
+3. Run `sudo dkp-pacman -S gba-dev`. When asked to select what you want to install, type `all` and click enter
+4. Add `DEVKITPRO=/opt/devkitpro` and `DEVKITARM=/opt/devkitpro/devkitARM` as environmental variables
+	* For Ubuntu, that would be `export DEVKITPRO=/opt/devkitpro` and `export DEVKITARM=/opt/devkitpro/devkitARM`
+
+You can now proceed to the installation section
+
+**Windows 7 and 8.1 users:** pret is no longer focusing on support in pokeemerald for [old versions of Windows](https://support.microsoft.com/help/13853) so consider upgrading to a current release of Windows 10 or try a third-party guide like [this one](https://www.pokecommunity.com/showthread.php?t=425246) instead. Remember to update the git clone from pret/pokeemerald to ProjectRevoTPP/pokeemerald-speedchoice
+
+**MacOS users:** Nogarremi does not have a Mac device and cannot walk somebody through that process
 
 # Installation
 
 To set up the repository:
 
-	git clone https://github.com/pret/pokeemerald
 	git clone https://github.com/pret/agbcc
+	git clone https://github.com/ProjectRevoTPP/pokeemerald-speedchoice
 
 	cd ./agbcc
 	./build.sh
-	./install.sh ../pokeemerald
+	./install.sh ../pokeemerald-speedchoice
 
-	cd ../pokeemerald
+	cd ../pokeemerald-speedchoice
+	./build_tools.sh
 
-To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image:
+To build **pokeemerald-speedchoice.gba**:
 
-	make compare
+	`make`
 
-If an OK is returned, then the installation went smoothly.
+A successful build will end with the lines:
+`arm-none-eabi-objcopy -O binary pokeemerald-speedchoice.elf pokeemerald-speedchoice.gba`
+`tools/gbafix/gbafix pokeemerald-speedchoice.gba -p --silent`
 
-**Windows users:** Consider adding exceptions for the `pokeemerald` and `agbcc` folders in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
-
-
-# Start
-
-To build **pokeemerald.gba** with your changes:
-
-	make
+**Windows users:** Consider adding exceptions for the `pokeemerald-speedchoice` and `agbcc` folders in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
 
 **macOS users:** If the base tools are not found in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
 
