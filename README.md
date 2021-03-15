@@ -1,15 +1,12 @@
-# Pokémon Emerald
+# Pokémon Emerald Speedchoice Edition
 
-[![Build Status][travis-badge]][travis]
+This is a decompilation of Pokémon Emerald with changes made to be more speedrun friendly.
 
-[travis]: https://travis-ci.org/pret/pokeemerald
-[travis-badge]: https://travis-ci.org/pret/pokeemerald.svg?branch=master
-
-This is a decompilation of Pokémon Emerald.
+* [Original decompilation by pret](https://github.com/pret/pokeemerald)
 
 It builds the following ROM:
 
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
+* pokeemerald-speedchoice.gba
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
