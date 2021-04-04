@@ -140,51 +140,51 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
+// -----------------------------------------
+// SPEEDCHOICE CHANGE
+// -----------------------------------------
+// Change: New Wild Encounters used to be set here, but is default now.
 static u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
 
     // 20/20/20/15/15/20 for new wild encounter table
 
-    if(CheckSpeedchoiceOption(NEWWILDENC, NEW_ON) == TRUE)
-    {
-        // COMMONS
-        // slot 1 (20%)
-        if(rand < 10)
-            return 0;
-        if(rand >= 10 && rand < 20)
-            return 6;
-        // slot 2 (20%)
-        if(rand >= 20 && rand < 30)
-            return 1;
-        if(rand >= 30 && rand < 40)
-            return 7;
-        // slot 3 (20%)
-        if(rand >= 40 && rand < 50)
-            return 2;
-        if(rand >= 50 && rand < 60)
-            return 8;
-        
-        // UNCOMMONS
-        // slot 4 (15%)
-        if(rand >= 60 && rand < 67)
-            return 3;
-        if(rand >= 67 && rand < 75)
-            return 9;
-        // slot 5 (15%)
-        if(rand >= 75 && rand < 82)
-            return 4;
-        if(rand >= 82 && rand < 90)
-            return 10;
-        
-        // RARE
-        // slot 6 (10%)
-        if(rand >= 90 && rand < 95)
-            return 5;
-        return 11;
-    }
-    else
-    {
+    // COMMONS
+    // slot 1 (20%)
+    if(rand < 10)
+        return 0;
+    if(rand >= 10 && rand < 20)
+        return 6;
+    // slot 2 (20%)
+    if(rand >= 20 && rand < 30)
+        return 1;
+    if(rand >= 30 && rand < 40)
+        return 7;
+    // slot 3 (20%)
+    if(rand >= 40 && rand < 50)
+        return 2;
+    if(rand >= 50 && rand < 60)
+        return 8;
+    
+    // UNCOMMONS
+    // slot 4 (15%)
+    if(rand >= 60 && rand < 67)
+        return 3;
+    if(rand >= 67 && rand < 75)
+        return 9;
+    // slot 5 (15%)
+    if(rand >= 75 && rand < 82)
+        return 4;
+    if(rand >= 82 && rand < 90)
+        return 10;
+    
+    // RARE
+    // slot 6 (10%)
+    if(rand >= 90 && rand < 95)
+        return 5;
+    return 11;
+/*
         if (rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
             return 0;
         else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_1)
@@ -209,7 +209,7 @@ static u8 ChooseWildMonIndex_Land(void)
             return 10;
         else
             return 11;
-    }
+*/
 }
 
 static u8 ChooseWildMonIndex_WaterRock(void)
@@ -218,8 +218,6 @@ static u8 ChooseWildMonIndex_WaterRock(void)
 
     // 35/25/15/15/10 for new wild encounter table
 
-    if(CheckSpeedchoiceOption(NEWWILDENC, NEW_ON) == TRUE)
-    {
         // COMMONS
         // slot 1 (35%)
         if(rand < 35) // 35%
@@ -239,9 +237,7 @@ static u8 ChooseWildMonIndex_WaterRock(void)
         // RARE
         // slot 5 (10%)
         return 4; // 10%
-    }
-    else
-    {
+/*
         if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
             return 0;
         else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
@@ -252,7 +248,7 @@ static u8 ChooseWildMonIndex_WaterRock(void)
             return 3;
         else
             return 4;
-    }
+*/
 }
 
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
@@ -263,36 +259,31 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 
     // 60/40 for new wild encounter table
 
-    // no fishing memes allowed
-    if(CheckSpeedchoiceOption(NEWWILDENC, NEW_ON) == TRUE)
-    {
-        // COMMONS
-        // slot 1 (60%)
-        if(rand < 12)
-            return 0;
-        if(rand >= 12 && rand < 24)
-            return 2;
-        if(rand >= 24 && rand < 36)
-            return 4;
-        if(rand >= 36 && rand < 48)
-            return 6;
-        if(rand >= 48 && rand < 60)
-            return 8;
+    // COMMONS
+    // slot 1 (60%)
+    if(rand < 12)
+        return 0;
+    if(rand >= 12 && rand < 24)
+        return 2;
+    if(rand >= 24 && rand < 36)
+        return 4;
+    if(rand >= 36 && rand < 48)
+        return 6;
+    if(rand >= 48 && rand < 60)
+        return 8;
 
-        // UNCOMMONS
-        // slot 2 (40%)
-        if(rand >= 60 && rand < 70)
-            return 1;
-        if(rand >= 70 && rand < 80)
-            return 3;
-        if(rand >= 80 && rand < 90)
-            return 5;
-        if(rand >= 90 && rand < 95)
-            return 7;
-        return 9;
-    }
-    else
-    {
+    // UNCOMMONS
+    // slot 2 (40%)
+    if(rand >= 60 && rand < 70)
+        return 1;
+    if(rand >= 70 && rand < 80)
+        return 3;
+    if(rand >= 80 && rand < 90)
+        return 5;
+    if(rand >= 90 && rand < 95)
+        return 7;
+    return 9;
+/*
         switch (rod)
         {
         case OLD_ROD:
@@ -323,7 +314,7 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
             break;
         }
         return wildMonIndex;
-    }
+*/
 }
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
@@ -649,6 +640,57 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 
     return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
 }
+
+bool32 IsWildMonInCurrentMap(u16 species)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    if(headerId != 0xFFFF)
+    {
+        const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+        const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+        const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+        const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].fishingMonsInfo;
+        int i;
+
+        if(landMonsInfo && landMonsInfo->wildPokemon)
+        {
+            for(i = 0; i < LAND_WILD_COUNT; i++)
+            {
+                if (landMonsInfo->wildPokemon[i].species == species)
+                    return TRUE;
+            }
+        }
+        
+        if(waterMonsInfo && waterMonsInfo->wildPokemon)
+        {
+            for(i = 0; i < WATER_WILD_COUNT; i++)
+            {
+                if (waterMonsInfo->wildPokemon[i].species == species)
+                    return TRUE;
+            }
+        }
+        
+        if(rockSmashMonsInfo && rockSmashMonsInfo->wildPokemon)
+        {
+            for(i = 0; i < ROCK_WILD_COUNT; i++)
+            {
+                if (rockSmashMonsInfo->wildPokemon[i].species == species)
+                    return TRUE;
+            }
+        }
+        
+        if(fishingMonsInfo && fishingMonsInfo->wildPokemon)
+        {
+            for(i = 0; i < FISH_WILD_COUNT; i++)
+            {
+                if (fishingMonsInfo->wildPokemon[i].species == species)
+                    return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+};
 
 bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
 {

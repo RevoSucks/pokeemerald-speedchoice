@@ -5405,13 +5405,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     
     if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_OFF) == FALSE)
     {
-        if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_STATIC) == TRUE)
-        {
-            // use the new level as the seed, not the current one.
-            u32 lv = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, 0) + 1;
-            
-            SeedRng((u32)((personality * species) + (lv * species))); // seed with the pokemon's PID with species and LV.
-        }
+        // use the new level as the seed, not the current one.
+        u32 lv = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, 0) + 1;
+
+        SeedRng((u32)((personality * species) + (lv * species))); // seed with the pokemon's PID with species and LV.
         return NationalPokedexNumToSpecies((Random() % NATIONAL_DEX_COUNT) + 1);
     }
 

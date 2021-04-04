@@ -567,15 +567,7 @@ SlateportCity_EventScript_PowerTMClerk:: @ 81DD1D8
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, SlateportCityItems1
 	pokemart SlateportCity_Pokemart_Speedchoice
-    goto AfterSlateportCityItems1
-
-SlateportCityItems1::
-    pokemart SlateportCity_Pokemart_PowerTMs
-
-AfterSlateportCityItems1::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

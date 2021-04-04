@@ -6,15 +6,7 @@ MauvilleCity_Mart_EventScript_Clerk:: @ 82110E6
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, MauvilleNormalMart
 	pokemart MauvilleCitySpeedchoice_Mart_Items
-	goto AfterMauvilleNormalMart
-	
-MauvilleNormalMart::
-	pokemart MauvilleCity_Mart_Pokemart
-
-AfterMauvilleNormalMart::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

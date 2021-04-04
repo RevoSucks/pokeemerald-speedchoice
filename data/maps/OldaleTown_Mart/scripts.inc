@@ -7,15 +7,7 @@ OldaleTown_Mart_EventScript_Clerk:: @ 81FC240
 	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_ExpandedItems
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, OldaleItems1
 	pokemart OldaleTownSpeedchoice_Mart_Items1
-	goto AfterOldaleItems1
-
-OldaleItems1::
-	pokemart OldaleTown_Mart_Pokemart_Basic
-
-AfterOldaleItems1::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -43,15 +35,7 @@ OldaleTownSpeedchoice_Mart_Items1:: @ 8152F9C
 	end
 
 OldaleTown_Mart_ExpandedItems:: @ 81FC26C
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, OldaleItems2
 	pokemart OldaleTownSpeedchoice_Mart_Items2
-	goto AfterOldaleItems2	
-
-OldaleItems2::
-	pokemart OldaleTown_Mart_Pokemart_Expanded
-
-AfterOldaleItems2::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

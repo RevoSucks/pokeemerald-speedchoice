@@ -7,7 +7,7 @@
 
 // The current total number of selectable options. Be sure to count preset too and
 // player name.
-#define CURRENT_OPTIONS_NUM 23
+#define CURRENT_OPTIONS_NUM 14
 
 // Maximum number of possible selectable options per option.
 #define MAX_CHOICES 6
@@ -19,7 +19,7 @@
 #define ALLOPTIONS_PER_PAGE OPTIONS_PER_PAGE + 2
 
 // Number of defined pages.
-#define MAX_PAGES 5
+#define MAX_PAGES 3
 
 // Deprecated macro. May have been in use for Sapphire Speedchoice when the window system
 // was different back then.
@@ -50,8 +50,27 @@
 #define oldmin(a, b) (a < b ? a : b)
 #define oldmax(a, b) (a > b ? a : b)
 
+// The chosen font ID for Speedchoice.
+#define SPEEDCHOICE_FONT_ID 1
+
 // Enumeration for Speedchoice Options. Used for CheckSpeedchoiceOption. These options
 // MUST match the order of the save data struct in global.h!
+
+/**
+ * The following Speedchoice options have been deprecated:
+ *
+ * Instant Text (moved to Options)
+ * Nerf Roxanne (made default)
+ * Super Bike (made default)
+ * New Wild Encounters (made default)
+ * Run Everywhere (made default)
+ * Meme Island (made default)
+ * Better Marts (made default)
+ * Early Bike (made default)
+ * Fast Egg Hatch (made default)
+ *
+ * Please ensure when rebasing these are readded per implementation.
+ */
 enum
 {
     // ----------------------
@@ -61,23 +80,23 @@ enum
     PLAYER_NAME_SET,
     EXPMATH,
     PLOTLESS,
-    INSTANTTEXT,
+    //INSTANTTEXT, // DEPRECATED (default)
     SPINNERS,
     MAXVISION,
-    NERFROXANNE,
-    SUPERBIKE,
-    NEWWILDENC,
+    //NERFROXANNE, // DEPRECATED (default)
+    //SUPERBIKE, // DEPRECATED (default)
+    //NEWWILDENC, // DEPRECATED (default)
     EARLYFLY,
-    RUN_EVERYWHERE,
-    MEME_ISLAND,
-    BETTER_MARTS,
+    //RUN_EVERYWHERE, // DEPRECATED (default)
+    //MEME_ISLAND, // DEPRECATED (default)
+    //BETTER_MARTS, // DEPRECATED (default)
     GOOD_EARLY_WILDS,
     EARLYSURF,
     NICE_MENU_ORDER,
     EASY_FALSE_SWIPE,
     FAST_CATCH,
-    EARLY_BIKE,
-    FAST_EGG_HATCH,
+    //EARLY_BIKE, // DEPRECATED (default)
+    //FAST_EGG_HATCH, // DEPRECATED (default)
     GEN_7_X_ITEMS,
     EVO_EVERY_LEVEL,
 
@@ -123,7 +142,7 @@ enum
 };
 
 // ----------------------
-// INSTANT TEXT ENUM
+// INSTANT TEXT ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -153,7 +172,7 @@ enum
 };
 
 // ----------------------
-// NERF ROXANNE ENUM
+// NERF ROXANNE ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -162,7 +181,7 @@ enum
 };
 
 // ----------------------
-// SUPER BIKE ENUM
+// SUPER BIKE ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -171,7 +190,7 @@ enum
 };
 
 // ----------------------
-// NEW WILD ENC ENUM
+// NEW WILD ENC ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -189,7 +208,7 @@ enum
 };
 
 // ----------------------
-// RUN EVERYWHERE ENUM
+// RUN EVERYWHERE ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -198,7 +217,7 @@ enum
 };
 
 // ----------------------
-// MEME ISLAND ENUM
+// MEME ISLAND ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -207,7 +226,7 @@ enum
 };
 
 // ----------------------
-// BETTER MARTS ENUM
+// BETTER MARTS ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -263,7 +282,7 @@ enum
 };
 
 // ----------------------
-// EARLY BIKE ENUM
+// EARLY BIKE ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -272,7 +291,7 @@ enum
 };
 
 // ----------------------
-// FAST EGG HATCHING ENUM
+// FAST EGG HATCHING ENUM (DEPRECATED)
 // ----------------------
 enum
 {
@@ -294,8 +313,7 @@ enum
 enum
 {
     EVO_EV_OFF,
-    EVO_EV_STATIC,
-    EVO_EV_RAND
+    EVO_EV_ON // STATIC
 };
 
 // Enumeration for optionType in the Speedchoice struct below.

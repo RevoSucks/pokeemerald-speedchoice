@@ -103,7 +103,7 @@ const u8 gSystemText_TerminatorS[] = _("{COLOR RED}$");
 /* SPEEDCHOICE MENU TEXT (Header Text)             */
 /* ----------------------------------------------- */
 const u8 gSpeedchoiceTextHeader[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SPEEDCHOICE MENU");
-const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.1.9");
+const u8 gSpeedchoiceCurrentVersion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}v1.2.0");
 
 /* ----------------------------------------------- */
 /* SPEEDCHOICE MENU TEXT (Option Choices)          */
@@ -223,6 +223,7 @@ const u8 gPresetNames[][20] = {
     _("{COLOR GREEN}{SHADOW LIGHT_GREEN}BINGO"),
     _("{COLOR GREEN}{SHADOW LIGHT_GREEN}CEA"),
     _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RACE"),
+    _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MEME"),
 };
 
 // use local config optionConfig[0] for preset!
@@ -234,7 +235,8 @@ enum {
     PRESET_VANILLA,
     PRESET_BINGO,
     PRESET_CEA,
-    PRESET_RACE
+    PRESET_RACE,
+    PRESET_MEME
 };
 
 // When creating the task that manages the speedchoice menu, store the task ID in RAM to
@@ -249,24 +251,15 @@ static const u8 gPresetVanilla[CURRENT_OPTIONS_NUM] = {
     0xFF,                   // (Reserved for trainer name)
     EXP_KEEP,               // EXP
     PLOT_KEEP,              // PLOTLESS
-    IT_OFF,                 // INSTANTTEXT
     SPIN_KEEP,              // SPINNERS
     MAX_OFF,                // MAXVISION
-    NERF_NO,                // NERFROXANNE
-    BIKE_OFF,               // SUPERBIKE
-    NEW_OFF,                // NEWWILDENC
     FLY_NO,                 // EARLYFLY
-    RUN_OFF,                // RUN_EVERYWHERE
-    MEME_SMALL,             // MEME_ISLAND
-    MARTS_OFF,              // BETTER_MARTS
     GOOD_OFF,               // GOOD_EARLY_WILDS
     SURF_OFF,               // EARLYSURF
     NICE_MENU_ORDER_OFF,    // NICE_MENU_ORDER
     EASY_FALSE_SWIPE_OFF,   // EASY_FALSE_SWIPE
     FAST_CATCH_OFF,         // FAST_CATCH
     EARLY_BIKE_NO,          // EARLY_BIKE
-    FAST_EGG_HATCH_NO,      // FAST_EGG_HATCH
-    GEN_7_X_ITEMS_OFF,      // GEN_7_X_ITEMS
     EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
 
@@ -275,23 +268,14 @@ static const u8 gPresetBingo[CURRENT_OPTIONS_NUM] = {
     0xFF,                   // (Reserved for trainer name)
     EXP_BW,                 // EXP
     PLOT_FULL,              // PLOTLESS
-    IT_ON,                  // INSTANTTEXT
     SPIN_KEEP,              // SPINNERS
     MAX_OFF,                // MAXVISION
-    NERF_YES,               // NERFROXANNE
-    BIKE_ON,                // SUPERBIKE
-    NEW_ON,                 // NEWWILDENC
     FLY_YES,                // EARLYFLY
-    RUN_ON,                 // RUN_EVERYWHERE
-    MEME_BIG,               // MEME_ISLAND
-    MARTS_ON,               // BETTER_MARTS
     GOOD_OFF,               // GOOD_EARLY_WILDS
     SURF_ON,                // EARLYSURF
     NICE_MENU_ORDER_ON,     // NICE_MENU_ORDER
     EASY_FALSE_SWIPE_TUTOR, // EASY_FALSE_SWIPE
     FAST_CATCH_OFF,         // FAST_CATCH
-    EARLY_BIKE_YES,         // EARLY_BIKE
-    FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
     GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
     EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
@@ -301,23 +285,14 @@ static const u8 gPresetCEA[CURRENT_OPTIONS_NUM] = {
     0xFF,                   // (Reserved for trainer name)
     EXP_BW,                 // EXP
     PLOT_FULL,              // PLOTLESS
-    IT_ON,                  // INSTANTTEXT
     SPIN_NERF,              // SPINNERS
     MAX_OFF,                // MAXVISION
-    NERF_YES,               // NERFROXANNE
-    BIKE_ON,                // SUPERBIKE
-    NEW_ON,                 // NEWWILDENC
     FLY_YES,                // EARLYFLY
-    RUN_ON,                 // RUN_EVERYWHERE
-    MEME_BIG,               // MEME_ISLAND
-    MARTS_ON,               // BETTER_MARTS
     GOOD_OFF,               // GOOD_EARLY_WILDS
     SURF_ON,                // EARLYSURF
     NICE_MENU_ORDER_ON,     // NICE_MENU_ORDER
     EASY_FALSE_SWIPE_TUTOR, // EASY_FALSE_SWIPE
     FAST_CATCH_ON,          // FAST_CATCH
-    EARLY_BIKE_YES,         // EARLY_BIKE
-    FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
     GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
     EVO_EV_OFF              // EVO_EVERY_LEVEL
 };
@@ -327,25 +302,33 @@ static const u8 gPresetRace[CURRENT_OPTIONS_NUM] = {
     0xFF,                   // (Reserved for trainer name)
     EXP_BW,                 // EXP
     PLOT_FULL,              // PLOTLESS
-    IT_ON,                  // INSTANTTEXT
     SPIN_NERF,              // SPINNERS
     MAX_OFF,                // MAXVISION
-    NERF_YES,               // NERFROXANNE
-    BIKE_ON,                // SUPERBIKE
-    NEW_ON,                 // NEWWILDENC
     FLY_YES,                // EARLYFLY
-    RUN_ON,                 // RUN_EVERYWHERE
-    MEME_BIG,               // MEME_ISLAND
-    MARTS_ON,               // BETTER_MARTS
     GOOD_STATIC,            // GOOD_EARLY_WILDS
     SURF_ON,                // EARLYSURF
     NICE_MENU_ORDER_ON,     // NICE_MENU_ORDER
     EASY_FALSE_SWIPE_TUTOR, // EASY_FALSE_SWIPE
     FAST_CATCH_OFF,         // FAST_CATCH
-    EARLY_BIKE_YES,         // EARLY_BIKE
-    FAST_EGG_HATCH_YES,     // FAST_EGG_HATCH
     GEN_7_X_ITEMS_ON,       // GEN_7_X_ITEMS
     EVO_EV_OFF              // EVO_EVERY_LEVEL
+};
+
+static const u8 gPresetMeme[CURRENT_OPTIONS_NUM] = {
+    PRESET_RACE,            // PRESET
+    0xFF,                   // (Reserved for trainer name)
+    EXP_NONE,               // EXP
+    PLOT_FULL,              // PLOTLESS
+    SPIN_WHY,               // SPINNERS
+    MAX_HELL,               // MAXVISION
+    FLY_NO,                 // EARLYFLY
+    GOOD_RAND,              // GOOD_EARLY_WILDS
+    SURF_OFF,               // EARLYSURF
+    NICE_MENU_ORDER_OFF,    // NICE_MENU_ORDER
+    EASY_FALSE_SWIPE_OFF,   // EASY_FALSE_SWIPE
+    FAST_CATCH_OFF,         // FAST_CATCH
+    GEN_7_X_ITEMS_OFF,      // GEN_7_X_ITEMS
+    EVO_EV_ON               // EVO_EVERY_LEVEL
 };
 
 /*
@@ -362,6 +345,8 @@ const u8 *GetPresetPtr(int presetID) {
             return gPresetCEA;
         case PRESET_RACE:
             return gPresetRace;
+        case PRESET_MEME:
+            return gPresetMeme;
     }
 }
 
@@ -494,7 +479,7 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
     // PRESET OPTION
     // ----------------------------------
     { 
-        /* Option Count   */ 4,
+        /* Option Count   */ 5,
         /* Option Type    */ ARROW,
         /* Option Preset  */ gSpeedchoiceOptionPreset,
         /* Option Text    */ Arrows,
@@ -535,17 +520,6 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
         /* Option Usable  */ TRUE 
     },
     // ----------------------------------
-    // INSTANT TEXT OPTION
-    // ----------------------------------
-    {
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionInstantText,
-        /* Option Text    */ OptionChoiceConfigOnOff,
-        /* Option Tooltip */ gSpeedchoiceTooltipInstantText,
-        /* Option Usable  */ TRUE 
-    },
-    // ----------------------------------
     // SPINNERS OPTION
     // ----------------------------------
     { 
@@ -568,39 +542,6 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
         /* Option Usable  */ TRUE
     },
     // ----------------------------------
-    // NERF ROXANNE OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionNerfRoxanne,
-        /* Option Text    */ OptionChoiceConfigYesNo,
-        /* Option Tooltip */ gSpeedchoiceTooltipNerfRoxanne,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // SUPER BIKE OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionSuperBike,
-        /* Option Text    */ OptionChoiceConfigOnOff,
-        /* Option Tooltip */ gSpeedchoiceTooltipSuperBike,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // NEW WILD ENC OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionNewWildEnc,
-        /* Option Text    */ OptionChoiceConfigOnOff,
-        /* Option Tooltip */ gSpeedchoiceTooltipNewWildEnc,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
     // EARLY FLY OPTION
     // ----------------------------------
     { 
@@ -609,39 +550,6 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
         /* Option Preset  */ gSpeedchoiceOptionEarlyFly,
         /* Option Text    */ OptionChoiceConfigYesNo,
         /* Option Tooltip */ gSpeedchoiceTooltipEarlyFly,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // RUN EVERYWHERE OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionRunEverywhere,
-        /* Option Text    */ OptionChoiceConfigOnOff,
-        /* Option Tooltip */ gSpeedchoiceTooltipRunEverywhere,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // MEME ISLAND OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionMemeIsland,
-        /* Option Text    */ OptionChoiceConfigYesNo,
-        /* Option Tooltip */ gSpeedchoiceTooltipMemeIsland,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // BETTER MARTS OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionBetterMarts,
-        /* Option Text    */ OptionChoiceConfigOnOff,
-        /* Option Tooltip */ gSpeedchoiceTooltipBetterMarts,
         /* Option Usable  */ TRUE
     },
     // ----------------------------------
@@ -700,28 +608,6 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
         /* Option Usable  */ TRUE
     },
     // ----------------------------------
-    // EARLY BIKE OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionEarlyBike,
-        /* Option Text    */ OptionChoiceConfigYesNo,
-        /* Option Tooltip */ gSpeedchoiceTooltipEarlyBike,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
-    // FAST EGG HATCHING OPTION
-    // ----------------------------------
-    { 
-        /* Option Count   */ 2,
-        /* Option Type    */ NORMAL,
-        /* Option Preset  */ gSpeedchoiceOptionFastEggHatch,
-        /* Option Text    */ OptionChoiceConfigYesNo,
-        /* Option Tooltip */ gSpeedchoiceTooltipFastEggHatch,
-        /* Option Usable  */ TRUE
-    },
-    // ----------------------------------
     // GEN 7 X ITEMS OPTION
     // ----------------------------------
     { 
@@ -736,10 +622,10 @@ const struct SpeedchoiceOption SpeedchoiceOptions[CURRENT_OPTIONS_NUM + 1] = // 
     // EVO EVERY LEVEL OPTION
     // ----------------------------------
     { 
-        /* Option Count   */ 3,
+        /* Option Count   */ 2,
         /* Option Type    */ NORMAL,
         /* Option Preset  */ gSpeedchoiceOptionEvoEveryLv,
-        /* Option Text    */ OptionChoiceConfigOffRand,
+        /* Option Text    */ OptionChoiceConfigOnOff,
         /* Option Tooltip */ gSpeedchoiceTooltipEvoEveryLv,
         /* Option Usable  */ TRUE
     },
@@ -806,23 +692,14 @@ void SetOptionChoicesAndConfigFromPreset(const u8 *preset)
     // avoid shifting RAM too much: hence the ugly per-option saving.
     gSaveBlock2Ptr->speedchoiceConfig.expsystem = preset[EXPMATH];
     gSaveBlock2Ptr->speedchoiceConfig.plotless = preset[PLOTLESS];
-    gSaveBlock2Ptr->speedchoiceConfig.instantText = preset[INSTANTTEXT];
     gSaveBlock2Ptr->speedchoiceConfig.spinners = preset[SPINNERS];
     gSaveBlock2Ptr->speedchoiceConfig.maxVision = preset[MAXVISION];
-    gSaveBlock2Ptr->speedchoiceConfig.nerfRoxanne = preset[NERFROXANNE];
-    gSaveBlock2Ptr->speedchoiceConfig.superbike = preset[SUPERBIKE];
-    gSaveBlock2Ptr->speedchoiceConfig.newwildencounters = preset[NEWWILDENC];
     gSaveBlock2Ptr->speedchoiceConfig.earlyfly = preset[EARLYFLY];
-    gSaveBlock2Ptr->speedchoiceConfig.runEverywhere = preset[RUN_EVERYWHERE];
-    gSaveBlock2Ptr->speedchoiceConfig.memeIsland = preset[MEME_ISLAND];
-    gSaveBlock2Ptr->speedchoiceConfig.betterMarts = preset[BETTER_MARTS];
     gSaveBlock2Ptr->speedchoiceConfig.goodEarlyWilds = preset[GOOD_EARLY_WILDS];
     gSaveBlock2Ptr->speedchoiceConfig.earlysurf = preset[EARLYSURF];
     gSaveBlock2Ptr->speedchoiceConfig.niceMenuOrder = preset[NICE_MENU_ORDER];
     gSaveBlock2Ptr->speedchoiceConfig.easyFalseSwipe = preset[EASY_FALSE_SWIPE];
     gSaveBlock2Ptr->speedchoiceConfig.fastCatch = preset[FAST_CATCH];
-    gSaveBlock2Ptr->speedchoiceConfig.earlyBike = preset[EARLY_BIKE];
-    gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch = preset[FAST_EGG_HATCH];
     gSaveBlock2Ptr->speedchoiceConfig.gen7XItems = preset[GEN_7_X_ITEMS];
     gSaveBlock2Ptr->speedchoiceConfig.evoEveryLevel = preset[EVO_EVERY_LEVEL];
 }
@@ -841,26 +718,12 @@ bool8 CheckSpeedchoiceOption(u8 option, u8 selection)
             return gSaveBlock2Ptr->speedchoiceConfig.expsystem == selection;
         case PLOTLESS:
             return gSaveBlock2Ptr->speedchoiceConfig.plotless == selection;
-        case INSTANTTEXT:
-            return gSaveBlock2Ptr->speedchoiceConfig.instantText == selection;
         case SPINNERS:
             return gSaveBlock2Ptr->speedchoiceConfig.spinners == selection;
         case MAXVISION:
             return gSaveBlock2Ptr->speedchoiceConfig.maxVision == selection;
-        case NERFROXANNE:
-            return gSaveBlock2Ptr->speedchoiceConfig.nerfRoxanne == selection;
-        case SUPERBIKE:
-            return gSaveBlock2Ptr->speedchoiceConfig.superbike == selection;
-        case NEWWILDENC:
-            return gSaveBlock2Ptr->speedchoiceConfig.newwildencounters == selection;
         case EARLYFLY:
             return gSaveBlock2Ptr->speedchoiceConfig.earlyfly == selection;
-        case RUN_EVERYWHERE:
-            return gSaveBlock2Ptr->speedchoiceConfig.runEverywhere == selection;
-        case MEME_ISLAND:
-            return gSaveBlock2Ptr->speedchoiceConfig.memeIsland == selection;
-        case BETTER_MARTS:
-            return gSaveBlock2Ptr->speedchoiceConfig.betterMarts == selection;
         case GOOD_EARLY_WILDS:
             return gSaveBlock2Ptr->speedchoiceConfig.goodEarlyWilds == selection;
         case EARLYSURF:
@@ -871,10 +734,6 @@ bool8 CheckSpeedchoiceOption(u8 option, u8 selection)
             return gSaveBlock2Ptr->speedchoiceConfig.easyFalseSwipe == selection;
         case FAST_CATCH:
             return gSaveBlock2Ptr->speedchoiceConfig.fastCatch == selection;
-        case EARLY_BIKE:
-            return gSaveBlock2Ptr->speedchoiceConfig.earlyBike == selection;
-        case FAST_EGG_HATCH:
-            return gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch == selection;
         case GEN_7_X_ITEMS:
             return gSaveBlock2Ptr->speedchoiceConfig.gen7XItems == selection;
         case EVO_EVERY_LEVEL:
@@ -902,7 +761,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     }
 
     dst[i] = EOS;
-    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, dst, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, SPEEDCHOICE_FONT_ID, dst, x, y, TEXT_SPEED_FF, NULL);
 }
 
 void DrawPageOptions(u8);
@@ -1193,7 +1052,7 @@ static void DrawPageChoice(u8 selection)
     text[3] = selection + CHAR_0;
     text[4] = EOS;
 
-    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, text, 40, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, SPEEDCHOICE_FONT_ID, text, 40, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
 }
 
 // Render the text for the choices for each option.
@@ -1220,7 +1079,7 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
         s16 x_right = Arrows[1].x;
         s16 y = NEWMENUOPTIONCOORDS(row);
         // perform centering, add 4 pixels for the 8x8 arrow centering
-        s16 x_preset = 4 + x_left + (x_right - x_left - GetStringWidth(1, gPresetNames[gLocalSpeedchoiceConfig.optionConfig[0]], 0)) / 2;
+        s16 x_preset = 4 + x_left + (x_right - x_left - GetStringWidth(SPEEDCHOICE_FONT_ID, gPresetNames[gLocalSpeedchoiceConfig.optionConfig[0]], 0)) / 2;
 
         DrawOptionMenuChoice(Arrows[0].string, x_left, y, 0); // left arrow
         DrawOptionMenuChoice(Arrows[1].string, x_right, y, 0); // right arrow
@@ -1234,7 +1093,7 @@ static void DrawGeneralChoices(struct SpeedchoiceOption *option, u8 selection, u
         s16 y = NEWMENUOPTIONCOORDS(row);
         s16 x_left = OptionChoiceConfigPlayerName[0].x;
         s16 x_right = 195; // from Arrows[1].x dont mind me just borrowing
-        s16 length = GetStringWidth(1, gTempPlayerName, 0);
+        s16 length = GetStringWidth(SPEEDCHOICE_FONT_ID, gTempPlayerName, 0);
         s16 x_preset = 4 + x_left + (x_right - x_left - length) / 2;
         
         // format the name with {COLOR GREEN}{SHADOW LIGHT_GREEN} first.
@@ -1328,7 +1187,7 @@ extern void DrawMainMenuWindowBorder(const struct WindowTemplate*, u16);
 static void DrawTooltip(u8 taskId, const u8 *str, int speed, bool32 isYesNo)
 {
     FillWindowPixelBuffer(SPD_WIN_TOOLTIP, 0x11);
-    AddTextPrinterParameterized(SPD_WIN_TOOLTIP, 1, str, 0, 1, speed, NULL);
+    AddTextPrinterParameterized(SPD_WIN_TOOLTIP, SPEEDCHOICE_FONT_ID, str, 0, 1, speed, NULL);
     //sub_8098858(SPD_WIN_TOOLTIP, 0x1D5, 0);
     DrawMainMenuWindowBorder((struct WindowTemplate *)&sSpeedchoiceMenuWinTemplates[SPD_WIN_TOOLTIP], 418);
     PutWindowTilemap(SPD_WIN_TOOLTIP);
@@ -1406,23 +1265,14 @@ static void SaveSpeedchoiceOptions(u8 taskId)
     // being bitfields means that it cannot currently be done.
     gSaveBlock2Ptr->speedchoiceConfig.expsystem = gLocalSpeedchoiceConfig.optionConfig[EXPMATH];
     gSaveBlock2Ptr->speedchoiceConfig.plotless = gLocalSpeedchoiceConfig.optionConfig[PLOTLESS];
-    gSaveBlock2Ptr->speedchoiceConfig.instantText = gLocalSpeedchoiceConfig.optionConfig[INSTANTTEXT];
     gSaveBlock2Ptr->speedchoiceConfig.spinners = gLocalSpeedchoiceConfig.optionConfig[SPINNERS];
     gSaveBlock2Ptr->speedchoiceConfig.maxVision = gLocalSpeedchoiceConfig.optionConfig[MAXVISION];
-    gSaveBlock2Ptr->speedchoiceConfig.nerfRoxanne = gLocalSpeedchoiceConfig.optionConfig[NERFROXANNE];
-    gSaveBlock2Ptr->speedchoiceConfig.superbike = gLocalSpeedchoiceConfig.optionConfig[SUPERBIKE];
-    gSaveBlock2Ptr->speedchoiceConfig.newwildencounters = gLocalSpeedchoiceConfig.optionConfig[NEWWILDENC];
     gSaveBlock2Ptr->speedchoiceConfig.earlyfly = gLocalSpeedchoiceConfig.optionConfig[EARLYFLY];
-    gSaveBlock2Ptr->speedchoiceConfig.runEverywhere = gLocalSpeedchoiceConfig.optionConfig[RUN_EVERYWHERE];
-    gSaveBlock2Ptr->speedchoiceConfig.memeIsland = gLocalSpeedchoiceConfig.optionConfig[MEME_ISLAND];
-    gSaveBlock2Ptr->speedchoiceConfig.betterMarts = gLocalSpeedchoiceConfig.optionConfig[BETTER_MARTS];
     gSaveBlock2Ptr->speedchoiceConfig.goodEarlyWilds = gLocalSpeedchoiceConfig.optionConfig[GOOD_EARLY_WILDS];
     gSaveBlock2Ptr->speedchoiceConfig.earlysurf = gLocalSpeedchoiceConfig.optionConfig[EARLYSURF];
     gSaveBlock2Ptr->speedchoiceConfig.niceMenuOrder = gLocalSpeedchoiceConfig.optionConfig[NICE_MENU_ORDER];
     gSaveBlock2Ptr->speedchoiceConfig.easyFalseSwipe = gLocalSpeedchoiceConfig.optionConfig[EASY_FALSE_SWIPE];
     gSaveBlock2Ptr->speedchoiceConfig.fastCatch = gLocalSpeedchoiceConfig.optionConfig[FAST_CATCH];
-    gSaveBlock2Ptr->speedchoiceConfig.earlyBike = gLocalSpeedchoiceConfig.optionConfig[EARLY_BIKE];
-    gSaveBlock2Ptr->speedchoiceConfig.fastEggHatch = gLocalSpeedchoiceConfig.optionConfig[FAST_EGG_HATCH];
     gSaveBlock2Ptr->speedchoiceConfig.gen7XItems = gLocalSpeedchoiceConfig.optionConfig[GEN_7_X_ITEMS];
     gSaveBlock2Ptr->speedchoiceConfig.evoEveryLevel = gLocalSpeedchoiceConfig.optionConfig[EVO_EVERY_LEVEL];
 
@@ -1642,9 +1492,12 @@ static void Task_SpeedchoiceMenuProcessInput(u8 taskId)
 // Self-explanatory. Draws the header window.
 static void DrawHeaderWindow(void)
 {
+    s32 width;
+    
     FillWindowPixelBuffer(SPD_WIN_TEXT_OPTION, 0x11);
-    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, 1, gSpeedchoiceTextHeader, 4, 1, TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, 1, gSpeedchoiceCurrentVersion, 172, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, SPEEDCHOICE_FONT_ID, gSpeedchoiceTextHeader, 4, 1, TEXT_SPEED_FF, NULL);
+    width = GetStringWidth(SPEEDCHOICE_FONT_ID, gSpeedchoiceCurrentVersion, GetFontAttribute(SPEEDCHOICE_FONT_ID, FONTATTR_LETTER_SPACING));
+    AddTextPrinterParameterized(SPD_WIN_TEXT_OPTION, SPEEDCHOICE_FONT_ID, gSpeedchoiceCurrentVersion, 204 - width, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(SPD_WIN_TEXT_OPTION, 3);
 }
 
@@ -1680,13 +1533,13 @@ void DrawPageOptions(u8 page) // Page is 1-indexed
         struct SpeedchoiceOption *option = (struct SpeedchoiceOption *)&SpeedchoiceOptions[i + (OPTIONS_PER_PAGE * (page - 1))];
         const u8 *string = option->string;
 
-        AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, string, 4, NEWMENUOPTIONCOORDS(i), TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(SPD_WIN_OPTIONS, SPEEDCHOICE_FONT_ID, string, 4, NEWMENUOPTIONCOORDS(i), TEXT_SPEED_FF, NULL);
         // TODO: Draw on SPD_WIN_OPTIONS, if it's broken
         DrawGeneralChoices(option, gLocalSpeedchoiceConfig.optionConfig[i + ((page-1) * 5)], i, FALSE);
     }
 
-    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, gSpeedchoiceOptionPage, 4, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
-    AddTextPrinterParameterized(SPD_WIN_OPTIONS, 1, gSpeedchoiceOptionStartGame, 4, NEWMENUOPTIONCOORDS(6), TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, SPEEDCHOICE_FONT_ID, gSpeedchoiceOptionPage, 4, NEWMENUOPTIONCOORDS(5), TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(SPD_WIN_OPTIONS, SPEEDCHOICE_FONT_ID, gSpeedchoiceOptionStartGame, 4, NEWMENUOPTIONCOORDS(6), TEXT_SPEED_FF, NULL);
     DrawPageChoice(gLocalSpeedchoiceConfig.pageNum);
     CopyWindowToVram(SPD_WIN_OPTIONS, 3);
 }

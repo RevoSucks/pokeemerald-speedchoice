@@ -1353,8 +1353,9 @@ bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 {
-    if(CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
+    //if(CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
         return FALSE;
+    /*
     if (metatileBehavior == MB_NO_RUNNING
      || metatileBehavior == MB_LONG_GRASS
      || metatileBehavior == MB_HOT_SPRINGS
@@ -1362,6 +1363,7 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
         return TRUE;
     else
         return FALSE;
+    */
 }
 
 bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)

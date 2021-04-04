@@ -108,7 +108,7 @@ by default
 */
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST; // INSTANT TEXT
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INST; // INSTANT TEXT
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
@@ -228,10 +228,10 @@ void NewGameInitData(void)
 
     // ADD DONE BUTTON
     AddBagItem(ITEM_DONE_BUTTON, 1);
-    if(CheckSpeedchoiceOption(EARLY_BIKE, EARLY_BIKE_YES) == TRUE) {
+    //if(CheckSpeedchoiceOption(EARLY_BIKE, EARLY_BIKE_YES) == TRUE) {
         AddBagItem(ITEM_MACH_BIKE, 1);
         FlagSet(FLAG_RECEIVED_BIKE); // put the flag here for making sure you got the bicycle
-    }
+    //}
 }
 
 static void ResetMiniGamesResults(void)

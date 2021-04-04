@@ -11,15 +11,7 @@ RustboroCity_Mart_EventScript_Clerk:: @ 8214F06
 	end
 
 RustboroCity_Mart_EventScript_PokemartBasic:: @ 8214F21
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, RustboroItems1
 	pokemart RustboroCitySpeedchoice_Mart_Items1
-	goto AfterRustboroItems1
-
-RustboroItems1::
-	pokemart RustboroCity_Mart_Pokemart_Basic
-
-AfterRustboroItems1::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -58,15 +50,7 @@ RustboroCitySpeedchoice_Mart_Items1:: @ 8157C00
 	end
 
 RustboroCity_Mart_EventScript_PokemartExpanded:: @ 8214F48
-	checkspeedchoice BETTER_MARTS, MARTS_OFF
-	goto_if TRUE, RustboroItems2
 	pokemart RustboroCitySpeedchoice_Mart_Items2
-	goto AfterRustboroItems2
-
-RustboroItems2::
-	pokemart RustboroCity_Mart_Pokemart_Expanded
-
-AfterRustboroItems2::
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

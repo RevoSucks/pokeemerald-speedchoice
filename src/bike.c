@@ -124,19 +124,19 @@ static const struct BikeHistoryInputInfo sAcroBikeTricksList[] =
     {DIR_EAST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_EAST},
 };
 
-// code
+// -----------------------------------------
+// SPEEDCHOICE CHANGE
+// -----------------------------------------
+// Change: Super Bike used to be set here, but is default now.
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
-    if(CheckSpeedchoiceOption(SUPERBIKE, BIKE_ON) == TRUE)
+    if(gMain.newKeys & R_BUTTON)
     {
-        if(gMain.newKeys & R_BUTTON)
-        {
-            PlaySE(SE_BIKE_BELL);
-            if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
-                SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
-            else
-                SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
-        }
+        PlaySE(SE_BIKE_BELL);
+        if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
+            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
+        else
+            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
     }
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
@@ -906,19 +906,21 @@ static u8 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
 
 bool8 RS_IsRunningDisallowed(u8 tile)
 {
-    if(CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
+    //if(CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
         return FALSE;
+    /*
     if (IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return TRUE;
     else
         return FALSE;
+    */
 }
 
 static bool8 IsRunningDisallowedByMetatile(u8 tile)
 {
     if (MetatileBehavior_IsRunningDisallowed(tile))
         return TRUE;
-    if ((CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_OFF) == TRUE) && 
+    if ((0) && 
          MetatileBehavior_IsFortreeBridge(tile) && (PlayerGetZCoord() & 1) == 0)
         return TRUE;
     return FALSE;
@@ -1071,10 +1073,12 @@ void Bike_HandleBumpySlopeJump(void)
 
 bool32 IsRunningDisallowed(u8 metatile)
 {
-    if (CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
+    //if (CheckSpeedchoiceOption(RUN_EVERYWHERE, RUN_ON) == TRUE)
         return FALSE;
+    /*
     if (!(gMapHeader.flags & MAP_ALLOW_RUNNING) || IsRunningDisallowedByMetatile(metatile) == TRUE)
         return TRUE;
     else
         return FALSE;
+    */
 }

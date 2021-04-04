@@ -51,7 +51,7 @@ const u8 gDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
 const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 const u8 gDownArrowYCoords[] = { 0x0, 0x1, 0x2, 0x1 };
-const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x0 };
+const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x4 };
 
 const struct GlyphWidthFunc gGlyphWidthFuncs[] =
 {
@@ -210,11 +210,17 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     return TRUE;
 }
 
+EWRAM_DATA u32 gMyDebugTextVal = 0;
+
+// -----------------------------------------
+// SPEEDCHOICE CHANGE
+// -----------------------------------------
+// Change: Instant Text used to be checked here, but is default.
 void RunTextPrinters(void)
 {
     int i;
     u16 temp;
-    bool32 isInstantText = !gSaveBlock2Ptr->speedchoiceConfig.instantText ? TRUE : FALSE; // force correct result. this is dumb, i know.
+    bool32 isInstantText = (gSaveBlock2Ptr->optionsTextSpeed == OPTIONS_TEXT_SPEED_INST); // force correct result. this is dumb, i know.
 
     do
     {
@@ -236,7 +242,7 @@ void RunTextPrinters(void)
                     case 3:
                         if (gTextPrinters[i].callback != 0)
                             gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
-                        return;
+                        isInstantText = FALSE; break;
                     case 1:
                         gTextPrinters[i].active = 0;
                         return;
@@ -781,7 +787,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     else
     {
         TextPrinterDrawDownArrow(textPrinter);
-        if ((JOY_HELD(A_BUTTON | B_BUTTON) && CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE) || JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((JOY_HELD(A_BUTTON | B_BUTTON) && 1 /*CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE*/) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);
@@ -799,7 +805,7 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
     }
     else
     {
-        if ((JOY_HELD(A_BUTTON | B_BUTTON) && CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE) || JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((JOY_HELD(A_BUTTON | B_BUTTON) && 1 /*CheckSpeedchoiceOption(INSTANTTEXT, IT_ON) == TRUE*/) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);

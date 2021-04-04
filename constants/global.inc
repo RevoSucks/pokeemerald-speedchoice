@@ -28,20 +28,16 @@
     @ 1 reserved for PLAYER_NAME
 	.set EXPMATH, 2
 	.set PLOTLESS, 3
-	.set INSTANTTEXT, 4
-	.set SPINNERS, 5
-	.set MAXVISION, 6
-	.set NERFROXANNE, 7
-	.set SUPERBIKE, 8
-	.set NEWWILDENC, 9
-	.set EARLYFLY, 10
-	.set RUN_EVERYWHERE, 11
-	.set MEME_ISLAND, 12
-	.set BETTER_MARTS, 13
-	.set GOOD_EARLY_WILDS, 14
-	.set EARLYSURF, 15
-	.set NICE_MENU_ORDER, 16
-	.set EASY_FALSE_SWIPE, 17
+	.set SPINNERS, 4
+	.set MAXVISION, 5
+	.set EARLYFLY, 6
+	.set GOOD_EARLY_WILDS, 7
+	.set EARLYSURF, 8
+	.set NICE_MENU_ORDER, 9
+	.set EASY_FALSE_SWIPE, 10
+    .set FAST_CATCH, 11
+    .set GEN_7_X_ITEMS, 12
+    .set EVO_EVERY_LEVEL, 13
 
     @ -------------
     @ option enums
@@ -57,7 +53,7 @@
     .set PLOT_KEEP, 1
     .set PLOT_FULL, 2
 
-    @ INSTANT TEXT
+    @ INSTANT TEXT (DEPRECATED)
     .set IT_ON, 0
     .set IT_OFF, 1
 
@@ -72,15 +68,15 @@
     .set MAX_SANE, 1
     .set MAX_HELL, 2
 
-    @ NERF ROXANNE
+    @ NERF ROXANNE (DEPRECATED)
     .set NERF_YES, 0
     .set NERF_NO, 1
 
-    @ SUPER BIKE
+    @ SUPER BIKE (DEPRECATED)
     .set BIKE_ON, 0
     .set BIKE_OFF, 1
 
-    @ NEW WILD ENC
+    @ NEW WILD ENC (DEPRECATED)
     .set NEW_ON, 0
     .set NEW_OFF, 1
 
@@ -88,15 +84,15 @@
     .set FLY_YES, 0
     .set FLY_NO, 1
 
-    @ RUN EVERYWHERE
+    @ RUN EVERYWHERE (DEPRECATED)
     .set RUN_ON, 0
     .set RUN_OFF, 1
 
-    @ MEME ISLAND
+    @ MEME ISLAND (DEPRECATED)
     .set MEME_BIG, 0 @ dot net
     .set MEME_SMALL, 1 @ you're banned
 
-    @ BETTER MARTS
+    @ BETTER MARTS (DEPRECATED)
     .set MARTS_ON, 0
     .set MARTS_OFF, 1
 

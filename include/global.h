@@ -455,25 +455,25 @@ struct SpeedchoiceSaveOptions
 {
     u8 expsystem:2;
     u8 plotless:2;
-    u8 instantText:1;
+    //u8 instantText:1;
     u8 spinners:2;
     u8 maxVision:2;
-    u8 nerfRoxanne:1;
-    u8 superbike:1;
-    u8 newwildencounters:1;
+    //u8 nerfRoxanne:1;
+    //u8 superbike:1;
+    //u8 newwildencounters:1;
     u8 earlyfly:1;
-    u8 runEverywhere:1;
-    u8 memeIsland:1;
-    u8 betterMarts:1;
+    //u8 runEverywhere:1;
+    //u8 memeIsland:1;
+    //u8 betterMarts:1;
     u8 goodEarlyWilds:2;
     u8 earlysurf:1;
     u8 niceMenuOrder:1;
     u8 easyFalseSwipe:2;
     u8 fastCatch:1;
-    u8 earlyBike:1;
-    u8 fastEggHatch:1;
+    //u8 earlyBike:1;
+    //u8 fastEggHatch:1;
     u8 gen7XItems:1;
-    u8 evoEveryLevel:2;
+    u8 evoEveryLevel:1;
 };
 
 // The struct has to be split in two because neither chunk of block 1 and 2 has enough room left for the full struct.

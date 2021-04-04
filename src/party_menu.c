@@ -1991,6 +1991,8 @@ static u16 GetTutorMove(u8 tutor)
 
 static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
+    if(tutor == 69) // SPEEDCHOICE easy false swipe
+        return TRUE;
     if (sTutorLearnsets[species] & (1 << tutor))
         return TRUE;
     else

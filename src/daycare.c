@@ -914,7 +914,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
                 continue;
 
             eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
-            if (eggCycles != 0 && CheckSpeedchoiceOption(FAST_EGG_HATCH, FAST_EGG_HATCH_NO) == TRUE)
+            if (eggCycles != 0 && 0 /*CheckSpeedchoiceOption(FAST_EGG_HATCH, FAST_EGG_HATCH_NO) == TRUE*/)
             {
                 if (eggCycles >= toSub)
                     eggCycles -= toSub;
