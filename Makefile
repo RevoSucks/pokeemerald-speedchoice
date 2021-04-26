@@ -42,7 +42,7 @@ SHELL := /bin/bash -o pipefail
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 INI = $(ROM:.gba=.ini)
-PATCH := $(ROM:.gba=.xdelta)
+PATCH = $(ROM:.gba=.xdelta)
 
 C_SUBDIR = src
 GFLIB_SUBDIR = gflib
@@ -115,7 +115,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix libagbsyscall modern
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix libagbsyscall modern patch ini release
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 

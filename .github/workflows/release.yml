@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        run: |
+          sudo apt-get install gcc-arm-none-eabi binutils-arm-none-eabi libcapstone-dev
+          git clone https://github.com/PikalaxALT/universal-pokemon-randomizer UPR -b fr-support
+          cd UPR
+          curl https://versaweb.dl.sourceforge.net/project/launch4j/launch4j-3/3.14/launch4j-3.14-linux-x64.tgz | tar -xzv
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 8
+
+      - name: Install agbcc
+        run: |
+          git clone https://github.com/pret/agbcc.git
+          cd agbcc
+          ./build.sh
+          ./install.sh ../
+
+      - name: Build
+        run: |
+          make -j${nproc} release UPRDIR=UPR
+
+      - name: Package Release
+        run: |
+          export relname=pokemon-emerald-speedchoice-${GITHUB_REF}-plus-randomizer
+          mkdir ${relname}
+          cp -r pokeemerald-speedchoice.xdelta UPR/build/$(date '+%Y%m%d')/* ${relname}/
+          zip -r ${relname}.zip ${relname}/
+
+      - name: Publish
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: pokemon-emerald-speedchoice-*-plus-randomizer.zip

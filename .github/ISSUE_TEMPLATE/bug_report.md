@@ -1,0 +1,32 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: PikalaxALT
+
+---
+
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Details**
+- Speedchoice version: <!-- printed in top right of main menu or Speedchoice Options menu. If you compiled from source, please give the commit hash also. -->
+- Emulator + version: <!-- e.g. mGBA 0.9.0, VisualBoy Advance 1.8.2 -->
+- Randomized? <!-- yes or no -->
+
+**Additional context**
+Add any other context about the problem here.
