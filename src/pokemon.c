@@ -5390,6 +5390,11 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
+EWRAM_DATA u32 gDebugEvoLastLevel = 0; // level used for random evo
+EWRAM_DATA u32 gDebugEvoLastPV1 = 0;   // PV used for random evo, before for loop
+EWRAM_DATA u32 gDebugEvoLastPV2 = 0;   // PV used for random evo, after for loop
+EWRAM_DATA u32 gDebugEvoLastInput = 0; // input to NationalPokedexNumToSpecies
+
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
     int i;
@@ -5406,10 +5411,28 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     if(CheckSpeedchoiceOption(EVO_EVERY_LEVEL, EVO_EV_OFF) == FALSE)
     {
         // use the new level as the seed, not the current one.
-        u32 lv = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, 0) + 1;
+        u32 lv = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
+        u32 newSpecies;
+        int attempts = 3;
+        
+        gDebugEvoLastLevel = lv;
+        gDebugEvoLastPV1 = personality;
+        
+        do {
+            for (i = 0; i < lv+species; i++) {
+                PRandom(&personality);
+            }
 
-        SeedRng((u32)((personality * species) + (lv * species))); // seed with the pokemon's PID with species and LV.
-        return NationalPokedexNumToSpecies((Random() % NATIONAL_DEX_COUNT) + 1);
+            newSpecies = NationalPokedexNumToSpecies((PRandom(&personality) * NATIONAL_DEX_COUNT / (RAND_MAX + 1)) + 1);
+        } while (attempts --> 0 && newSpecies == species);
+        
+        // if you ran out of attempts and got the same species 3 times in a row, go buy
+        // some lottery tickets.
+        
+        gDebugEvoLastPV2 = personality;
+        gDebugEvoLastInput = newSpecies;
+        
+        return newSpecies;
     }
 
     if (heldItem == ITEM_ENIGMA_BERRY)

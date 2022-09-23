@@ -4,6 +4,10 @@
 extern u32 gRngValue;
 extern u32 gRng2Value;
 
+#ifndef RAND_MAX
+#define RAND_MAX 0xFFFF
+#endif //RAND_MAX
+
 //Returns a 16-bit pseudorandom number
 u16 Random(void);
 u16 Random2(void);
@@ -19,5 +23,6 @@ u16 Random2(void);
 //Sets the initial seed value of the pseudorandom number generator
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
+u16 PRandom(u32 *state);
 
 #endif // GUARD_RANDOM_H
